@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class BulletCollision : MonoBehaviour
 {
+    // enum describing which bodypart was hit by player
     public enum BodyPart { head, body }
     [SerializeField] BodyPart bodyPart = BodyPart.body;
 
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log(other.name);
+        // if the zombie isn't dead, determine which bodypart was hit
+        // and run the appropriate code
         if (!GetComponentInParent<AIController>().IsDead())
         {
             if (bodyPart == BodyPart.body)

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class FPSCActions : MonoBehaviour
 {
-    public static event Action SHOOT;
-    public static event Action<RaycastHit> GUN_HIT;
+    public static event Action SHOOT; // event that gets sent out when the player clicks the fire button
+    public static event Action<RaycastHit> GUN_HIT; // event that sends out the hit info of the raycast
 
     Transform mainCam;
 
