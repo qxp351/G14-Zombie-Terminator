@@ -129,6 +129,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba14e8a5640f438596947157d5b536e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 1
-  m_itemName: Flashlight
-  m_itemAmount: 1
+  itemType: 0

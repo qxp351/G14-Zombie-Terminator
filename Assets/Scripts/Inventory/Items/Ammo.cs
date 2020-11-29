@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Consumable : Item
+public class Ammo : Consumable
 {
-    public Consumable(string name, int amount)
+    public Ammo()
     {
-        named = name;
-        this.amount = amount;
+        name = "Ammo";
+        amount = Random.Range(1, 41);
     }
+
     public override void Use()
     {
         throw new System.NotImplementedException();

@@ -9,19 +9,14 @@ public class Reticle : MonoBehaviour
 
     [SerializeField] List<GameObject> reticleType = new List<GameObject>();
     [SerializeField] float m_grabDistance = 2f;
-    LayerMask layer;
 
     private void Update()
     {
-        if (ReticleManager.hit)
+        if (ReticleManager.Mask == LayerMask.GetMask("Collectable"))
         {
-            layer = LayerMask.GetMask(LayerMask.LayerToName(ReticleManager.hitInfo.transform.gameObject.layer));
-            if (layer == LayerMask.GetMask("Collectable"))
-            {
-                if (ReticleManager.hitInfo.distance <= m_grabDistance) ReticleMask(1);
-            }
-            else ReticleMask(0);
+            if (ReticleManager.Distance <= m_grabDistance) ReticleMask(1);
         }
+        else ReticleMask(0);
     }
 
     void ReticleMask(int type)

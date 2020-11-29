@@ -5,7 +5,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class WeaponBob : MonoBehaviour
 {
-    [SerializeField] bool canFire = true;
+    [SerializeField] bool m_canFire = true;
+
+    [Header("Appearance Properties")]
+    [SerializeField] AnimationCurve m_appearCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
+    [SerializeField] float m_appearanceSpeed = 1f;
+    Vector3 m_originalPosition = Vector3.zero;
 
     [Header("Effect Properties")]
     [SerializeField] ParticleSystem m_muzzleFlash = null;
@@ -14,8 +19,7 @@ public class WeaponBob : MonoBehaviour
     [Header("Weapon Bob Properties")]
     [SerializeField] CurvedObjectBob m_idleBob = new CurvedObjectBob();
     [SerializeField] CurvedObjectBob m_firedBob = new CurvedObjectBob();
-    [SerializeField] CurvedObjectBob m_swapBob = new CurvedObjectBob();
-    [SerializeField] float fireSpeed = 20f;
+    [SerializeField] float m_fireSpeed = 20f;
     FirstPersonController m_fpc;
     PlayerAnimator m_panim;
 
@@ -29,21 +33,27 @@ public class WeaponBob : MonoBehaviour
     [SerializeField] Vector3 m_speedWhileMoving = new Vector3(1.6f, 1.5f, 1.4f);
 
     bool m_firing = false;
-    bool m_swaping = false;
+    bool m_appearing = true;
 
     private void OnEnable()
     {
-        if (canFire) PlayerInput.FIRE += PlayerInput_FIRE;
+        if (m_canFire) PlayerInput.FIRE += PlayerInput_FIRE;
+        StartCoroutine(nameof(OnAppear));
     }
 
     private void OnDisable()
     {
-        if (canFire) PlayerInput.FIRE -= PlayerInput_FIRE;
+        if (m_canFire) PlayerInput.FIRE -= PlayerInput_FIRE;
     }
 
     private void PlayerInput_FIRE()
     {
-        if (!m_firing) StartCoroutine(nameof(FiredBob));
+        if (!m_firing && !m_appearing) StartCoroutine(nameof(FiredBob));
+    }
+
+    private void Awake()
+    {
+        m_originalPosition = transform.localPosition;
     }
 
     private void Start()
@@ -52,45 +62,14 @@ public class WeaponBob : MonoBehaviour
         m_panim = FindObjectOfType<PlayerAnimator>();
         m_idleBob.Setup(transform, 5f);
         m_firedBob.Setup(transform, 5f);
-        m_swapBob.Setup(transform, 5f);
     }
 
     private void Update()
     {
+        if (m_appearing) return;
+
         if (!m_firing) IdleBob();
-        else if (m_swaping) SwapBob();
         else m_idleBob.ResetBob();
-    }
-
-    IEnumerator FiredBob()
-    {
-        m_firing = true;
-        m_muzzleFlash.Play();
-
-        var mask = LayerMask.GetMask("Hitable");
-        var cam = Camera.main.transform;
-
-        if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, 1000f, mask))
-        {
-            hitInfo.collider.TryGetComponent(out IHitable hit);
-            if (hit != null) hit.OnHit(hitInfo.point, hitInfo.normal);
-            else
-            {
-                Instantiate(m_impact, hitInfo.point, Quaternion.LookRotation(hitInfo.normal, Vector3.up));
-            }
-        }
-
-        while (m_firing)
-        {
-            transform.localPosition = m_firedBob.DoHeadBob(fireSpeed);
-            if (m_firedBob.FinishedCycle())
-            {
-                m_firing = false;
-                m_firedBob.ResetBob();
-                yield break;
-            }
-            yield return null;
-        }
     }
 
     void IdleBob()
@@ -118,8 +97,57 @@ public class WeaponBob : MonoBehaviour
         transform.localPosition = m_idleBob.DoHeadBob((m_panim.Speed() == 0 ? 1f : m_panim.Speed()) * 2f);
     }
 
-    void SwapBob()
+    IEnumerator FiredBob()
     {
-        transform.localPosition = m_swapBob.DoHeadBob(1f);
+        m_firing = true;
+        m_muzzleFlash.Play();
+
+        var mask = LayerMask.GetMask("Hitable");
+        var cam = Camera.main.transform;
+
+        if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, 1000f, mask))
+        {
+            hitInfo.collider.TryGetComponent(out IHitable hit);
+            if (hit != null) hit.OnHit(hitInfo.point, hitInfo.normal);
+            else
+            {
+                Instantiate(m_impact, hitInfo.point, Quaternion.LookRotation(hitInfo.normal, Vector3.up));
+            }
+        }
+
+        while (m_firing)
+        {
+            transform.localPosition = m_firedBob.DoHeadBob(m_fireSpeed);
+            if (m_firedBob.FinishedCycle())
+            {
+                m_firing = false;
+                m_firedBob.ResetBob();
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+    IEnumerator OnAppear()
+    {
+        m_appearing = true;
+
+        yield return new WaitUntil(() => m_originalPosition != Vector3.zero);
+
+        var cyclePos = 0f;
+        var time = m_appearCurve[m_appearCurve.length - 1].time;
+
+        while (cyclePos < time)
+        {
+            var yPos = m_originalPosition.y + m_appearCurve.Evaluate(cyclePos);
+            transform.localPosition = new Vector3(transform.localPosition.x, yPos, transform.localPosition.z);
+            cyclePos += Time.deltaTime * m_appearanceSpeed;
+            yield return null;
+        }
+        transform.localPosition = m_originalPosition;
+
+        yield return new WaitForSeconds(.3f);
+        m_appearing = false;
+        yield break;
     }
 }

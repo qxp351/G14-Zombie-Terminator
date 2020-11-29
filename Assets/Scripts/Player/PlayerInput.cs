@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerInput : MonoBehaviour
@@ -10,9 +11,14 @@ public class PlayerInput : MonoBehaviour
     public static event Action GRAB;
     public static event Action INVENTORY;
 
+    FirstPersonController m_fpc;
+    bool m_inInventory = false;
+
     private void Start()
     {
+        m_fpc = GetComponent<FirstPersonController>();
         StartCoroutine(nameof(StepUpdate));
+        ToggleCursor(false);
     }
 
     IEnumerator StepUpdate()
@@ -25,8 +31,24 @@ public class PlayerInput : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
             if (CrossPlatformInputManager.GetButton("Fire1") && Reticle.Is == Reticle.ReticleType.shoot) FIRE?.Invoke();
-            if (CrossPlatformInputManager.GetButtonDown("Inventory")) INVENTORY?.Invoke();
+            if (CrossPlatformInputManager.GetButtonDown("Inventory"))
+            {
+                INVENTORY?.Invoke();
+                m_inInventory = !m_inInventory;
+                ToggleCursor(m_inInventory);
+                m_fpc.enabled = !m_inInventory;
+            }
+            if (Input.GetKeyDown(KeyCode.Escape) && !m_inInventory)
+            {
+                ToggleCursor(true);
+            }
             yield return null;
         }
+    }
+
+    void ToggleCursor(bool obj)
+    {
+        Cursor.lockState = obj ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = obj;
     }
 }

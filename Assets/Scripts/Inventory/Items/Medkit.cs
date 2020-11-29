@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tool : Item
+public class Medkit : Consumable
 {
-    public Tool(string name)
+    public Medkit()
     {
-        named = name;
+        name = "Medkit";
         amount = 1;
     }
 
     public override void Use()
     {
-        throw new System.NotImplementedException();
+        PlayerStats.current.Damage(-3);
+        Inventory.current.DropItem(this, 1);
     }
 }

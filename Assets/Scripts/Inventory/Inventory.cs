@@ -22,10 +22,10 @@ public class Inventory : MonoBehaviour
 
     private void PlayerInput_GRAB()
     {
-        if (ReticleManager.hitInfo.collider.TryGetComponent(out ICollectable collectable))
+        if (ReticleManager.Object.TryGetComponent(out ICollectable collectable))
         {
             AddItem(collectable.ItemData);
-            Destroy(ReticleManager.hitInfo.collider.gameObject);
+            Destroy(ReticleManager.Object);
         }
     }
 
@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
     {
         if (m_items.Contains(item))
         {
-            if (item is Consumable) m_items[m_items.IndexOf(item)].amount += 1;
+            if (item is Consumable) (m_items[m_items.IndexOf(item)] as Consumable).amount += 1;
             else return;
         }
         else
@@ -45,38 +45,13 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(Item item)
     {
-        if (!m_items.Contains(item)) return;
-
-        if (item is Consumable)
-        {
-            if (m_items[m_items.IndexOf(item)].amount > 1)
-            {
-                m_items[m_items.IndexOf(item)].amount -= 1;
-            }
-            else
-            {
-                m_items.Remove(item);
-            }
-        }
         item.Use();
-        ITEMS?.Invoke(m_items);
-    }
-
-    public void DropItem(Weapon weapon)
-    {
-        m_items.Remove(weapon);
-        ITEMS?.Invoke(m_items);
-    }
-
-    public void DropItem(Tool tool)
-    {
-        m_items.Remove(tool);
         ITEMS?.Invoke(m_items);
     }
 
     public void DropItem(Consumable item, int amount)
     {
-        m_items[m_items.IndexOf(item)].amount -= amount;
+        (m_items[m_items.IndexOf(item)] as Consumable).amount -= amount;
         ITEMS?.Invoke(m_items);
     }
 }

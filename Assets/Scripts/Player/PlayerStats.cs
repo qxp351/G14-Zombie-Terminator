@@ -7,6 +7,9 @@ public class PlayerStats : Stats
     public static event System.Action DAMAGE;
     public static event System.Action<int> HEALTH;
 
+    public static PlayerStats current;
+    private void Awake() => current = this;
+
     public override void Damage(int amount)
     {
         base.Damage(amount);
