@@ -15,6 +15,8 @@ public class InventorySlot : MonoBehaviour
 
         var str = item is Consumable ? $"{(item as Consumable).amount}" : "NaN";
         display.text = $"{item.name} [{str}]";
+
+        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => Button_OnClick(item));
     }
 

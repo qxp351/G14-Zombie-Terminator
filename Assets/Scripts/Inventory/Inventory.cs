@@ -10,6 +10,11 @@ public class Inventory : MonoBehaviour
     public static Inventory current;
     private void Awake() => current = this;
 
+    private void Start()
+    {
+        AddItem(new Pistol());
+    }
+
     private void OnEnable()
     {
         PlayerInput.GRAB += PlayerInput_GRAB;
@@ -31,9 +36,15 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item)
     {
+        if (item is CannedFood || item is Ammo)
+        {
+            item.Use();
+            return;
+        }
+
         if (m_items.Contains(item))
         {
-            if (item is Consumable) (m_items[m_items.IndexOf(item)] as Consumable).amount += 1;
+            if (item is Consumable) (m_items[m_items.IndexOf(item)] as Consumable).amount += (item as Consumable).amount;
             else return;
         }
         else
@@ -45,13 +56,17 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(Item item)
     {
-        item.Use();
+        if (m_items.Contains(item)) item.Use();
         ITEMS?.Invoke(m_items);
     }
 
     public void DropItem(Consumable item, int amount)
     {
-        (m_items[m_items.IndexOf(item)] as Consumable).amount -= amount;
+        var consumable = (m_items[m_items.IndexOf(item)] as Consumable);
+
+        consumable.amount -= amount;
+        if (consumable.amount <= 0) m_items.Remove(consumable);
+        else m_items[m_items.IndexOf(consumable)] = consumable;
         ITEMS?.Invoke(m_items);
     }
 }

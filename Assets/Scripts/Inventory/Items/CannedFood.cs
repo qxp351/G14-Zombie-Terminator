@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannedFood : Consumable
+public class CannedFood : Tool
 {
     public CannedFood()
     {
         name = "Canned Food";
-        amount = 1;
     }
 
     public override void Use()
     {
-        throw new System.NotImplementedException();
+        SuppliesManager.current.UpdateFood(1);
     }
 }

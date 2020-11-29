@@ -11,6 +11,6 @@ public class Pistol : Tool
 
     public override void Use()
     {
-        WeaponManager.current.SwapWeapon(WeaponManager.Weapon.pistol);
+        WeaponManager.CurrentWeapon = WeaponManager.Weapon.pistol;
     }
 }

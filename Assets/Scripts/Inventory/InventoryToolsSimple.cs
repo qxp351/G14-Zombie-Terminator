@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryDisplaySimple : MonoBehaviour
+public class InventoryToolsSimple : MonoBehaviour
 {
     [SerializeField] GameObject m_slotPrefab = null;
 
@@ -28,6 +28,7 @@ public class InventoryDisplaySimple : MonoBehaviour
         }
         foreach (Item item in obj)
         {
+            if (!(item is Tool)) continue;
             prefab = Instantiate(m_slotPrefab, transform);
             if (prefab.TryGetComponent(out InventorySlot slot))
             {

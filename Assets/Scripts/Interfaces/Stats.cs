@@ -8,6 +8,11 @@ public abstract class Stats : MonoBehaviour
     [SerializeField] protected Vector2Int health = new Vector2Int(20, 20);
     bool isDying = false;
 
+    public virtual void Heal(int amount)
+    {
+        health.x = health.x + amount > health.y ? health.y : health.x + amount;
+    }
+
     public virtual void Damage(int amount)
     {
         health.x = health.x - amount < 0 ? 0 : health.x - amount;

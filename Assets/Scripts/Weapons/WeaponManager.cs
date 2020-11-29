@@ -14,6 +14,7 @@ public class WeaponManager : MonoBehaviour
 
     [Header("Flashlight")]
     [SerializeField] GameObject m_flashlight = null;
+    public static bool HasFlashlight;
 
     public static WeaponManager current;
     private void Awake() => current = this;
@@ -43,13 +44,13 @@ public class WeaponManager : MonoBehaviour
 
     public void OpenInventory()
     {
-        UnEquipWeapon(m_currentWeapon);
+        UnEquipWeapon((int)CurrentWeapon);
         EquipWeapon((int)Weapon.bag);
     }
     public void CloseInventory()
     {
         UnEquipWeapon((int)Weapon.bag);
-        EquipWeapon(m_currentWeapon);
+        EquipWeapon((int)CurrentWeapon);
     }
 
     void UnEquipWeapon(int weapon)
@@ -67,6 +68,12 @@ public class WeaponManager : MonoBehaviour
     public void EquipFlashlight()
     {
         m_flashlight.SetActive(true);
+        HasFlashlight = true;
+    }
+    public void ToggleFlashlight()
+    {
+        if (m_flashlight.activeSelf) m_flashlight.SetActive(false);
+        else m_flashlight.SetActive(true);
     }
 
     [System.Serializable]

@@ -12,7 +12,7 @@ public class Medkit : Consumable
 
     public override void Use()
     {
-        PlayerStats.current.Damage(-3);
+        PlayerStats.current.Heal(3);
         Inventory.current.DropItem(this, 1);
     }
 }

@@ -42,6 +42,10 @@ public class PlayerInput : MonoBehaviour
             {
                 ToggleCursor(true);
             }
+            if (CrossPlatformInputManager.GetButtonDown("Flashlight") && WeaponManager.HasFlashlight)
+            {
+                WeaponManager.current.ToggleFlashlight();
+            }
             yield return null;
         }
     }

@@ -11,6 +11,6 @@ public class Launcher : Tool
 
     public override void Use()
     {
-        WeaponManager.current.SwapWeapon(WeaponManager.Weapon.launcher);
+        WeaponManager.CurrentWeapon = WeaponManager.Weapon.launcher;
     }
 }

@@ -48,7 +48,7 @@ public class WeaponBob : MonoBehaviour
 
     private void PlayerInput_FIRE()
     {
-        if (!m_firing && !m_appearing) StartCoroutine(nameof(FiredBob));
+        if (!m_firing && !m_appearing && SuppliesManager.current.Ammo() > 0) StartCoroutine(nameof(FiredBob));
     }
 
     private void Awake()
@@ -101,6 +101,7 @@ public class WeaponBob : MonoBehaviour
     {
         m_firing = true;
         m_muzzleFlash.Play();
+        SuppliesManager.current.UseAmmo();
 
         var mask = LayerMask.GetMask("Hitable");
         var cam = Camera.main.transform;

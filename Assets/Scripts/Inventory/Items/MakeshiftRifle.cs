@@ -11,6 +11,6 @@ public class MakeshiftRifle : Tool
 
     public override void Use()
     {
-        WeaponManager.current.SwapWeapon(WeaponManager.Weapon.rifle);
+        WeaponManager.CurrentWeapon = WeaponManager.Weapon.rifle;
     }
 }

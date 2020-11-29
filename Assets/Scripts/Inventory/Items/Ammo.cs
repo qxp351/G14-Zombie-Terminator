@@ -7,11 +7,11 @@ public class Ammo : Consumable
     public Ammo()
     {
         name = "Ammo";
-        amount = Random.Range(1, 41);
+        amount = Random.Range(1, 11);
     }
 
     public override void Use()
     {
-        throw new System.NotImplementedException();
+        SuppliesManager.current.UpdateAmmo(amount);
     }
 }
