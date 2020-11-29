@@ -38,10 +38,6 @@ public class PlayerInput : MonoBehaviour
                 ToggleCursor(m_inInventory);
                 m_fpc.enabled = !m_inInventory;
             }
-            if (Input.GetKeyDown(KeyCode.Escape) && !m_inInventory)
-            {
-                ToggleCursor(true);
-            }
             if (CrossPlatformInputManager.GetButtonDown("Flashlight") && WeaponManager.HasFlashlight)
             {
                 WeaponManager.current.ToggleFlashlight();

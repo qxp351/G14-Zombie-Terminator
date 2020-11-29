@@ -8,8 +8,8 @@ public class SuppliesManager : MonoBehaviour
     public static event Action<int> AMMO;
     public static event Action<int> FOOD;
 
-    [SerializeField] int m_currentAmmo = 0;
-    [SerializeField] int m_currentFood = 0;
+    [SerializeField] int m_currentAmmo = 9;
+    [SerializeField] int m_currentFood = 1;
 
     public static SuppliesManager current;
     private void Awake()
