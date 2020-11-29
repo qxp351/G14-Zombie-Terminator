@@ -31,7 +31,7 @@ public class PlayerInput : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
             if (CrossPlatformInputManager.GetButton("Fire1") && Reticle.Is == Reticle.ReticleType.shoot) FIRE?.Invoke();
-            if (CrossPlatformInputManager.GetButtonDown("Inventory"))
+            if (CrossPlatformInputManager.GetButtonDown("Inventory") && m_fpc.IsGrounded())
             {
                 INVENTORY?.Invoke();
                 m_inInventory = !m_inInventory;

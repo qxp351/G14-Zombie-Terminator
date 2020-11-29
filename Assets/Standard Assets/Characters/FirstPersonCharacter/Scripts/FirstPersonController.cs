@@ -261,6 +261,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public bool IsWalking() => m_IsWalking;
         public bool IsJumping() => m_Jumping;
+        public bool IsGrounded() => m_PreviouslyGrounded && m_CharacterController.isGrounded;
 
         public float WalkSpeed() => m_WalkSpeed;
         public float RunSpeed() => m_RunSpeed;
