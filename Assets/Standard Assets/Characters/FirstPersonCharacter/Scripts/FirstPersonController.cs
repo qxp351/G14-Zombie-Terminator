@@ -256,5 +256,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+
+        #region Custom Properties and Methods
+
+        public bool IsWalking() => m_IsWalking;
+        public bool IsJumping() => m_Jumping;
+
+        public float WalkSpeed() => m_WalkSpeed;
+        public float RunSpeed() => m_RunSpeed;
+        public float CurrentSpeed() => m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+
+        public void ToggleCursor(bool obj) => m_MouseLook.ChangeInternalLockUpdate(obj);
+
+        #endregion
     }
 }

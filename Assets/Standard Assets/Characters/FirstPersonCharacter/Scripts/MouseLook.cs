@@ -39,17 +39,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(clampVerticalRotation)
                 m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
 
-            if(smooth)
+            if (m_cursorIsLocked)
             {
-                character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
-                    smoothTime * Time.deltaTime);
-                camera.localRotation = Quaternion.Slerp (camera.localRotation, m_CameraTargetRot,
-                    smoothTime * Time.deltaTime);
-            }
-            else
-            {
-                character.localRotation = m_CharacterTargetRot;
-                camera.localRotation = m_CameraTargetRot;
+                if (smooth)
+                {
+                    character.localRotation = Quaternion.Slerp(character.localRotation, m_CharacterTargetRot,
+                        smoothTime * Time.deltaTime);
+                    camera.localRotation = Quaternion.Slerp(camera.localRotation, m_CameraTargetRot,
+                        smoothTime * Time.deltaTime);
+                }
+                else
+                {
+                    character.localRotation = m_CharacterTargetRot;
+                    camera.localRotation = m_CameraTargetRot;
+                }
             }
 
             UpdateCursorLock();
@@ -95,6 +98,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+        public void ChangeInternalLockUpdate(bool obj)
+        {
+            m_cursorIsLocked = obj;
+
+            if (m_cursorIsLocked)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else if (!m_cursorIsLocked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+
         Quaternion ClampRotationAroundXAxis(Quaternion q)
         {
             q.x /= q.w;
@@ -110,6 +129,5 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             return q;
         }
-
     }
 }
