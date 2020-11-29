@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class ReticleManager : MonoBehaviour
 {
-    Ray ray;
-    LayerMask rayMask;
-    public static bool hit;
-    public static RaycastHit hitInfo;
+    Ray m_ray;
+    LayerMask m_mask;
+    RaycastHit m_hit;
+
+    public static LayerMask Mask;
+    public static float Distance;
+    public static GameObject Object;
 
     private void Start()
     {
-        rayMask = LayerMask.GetMask(new string[] { "Hitable", "Collectable" });
+        m_mask = LayerMask.GetMask(new string[] { "Hitable", "Collectable" });
     }
 
     private void Update()
     {
-        ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out hitInfo, 1000f, rayMask)) hit = true;
-        else hit = false;
+        m_ray = new Ray(transform.position, transform.forward);
+        if (Physics.Raycast(m_ray, out m_hit, 1000f, m_mask))
+        {
+            Mask = LayerMask.GetMask(LayerMask.LayerToName(m_hit.transform.gameObject.layer));
+            Distance = m_hit.distance;
+            Object = m_hit.transform.gameObject;
+        }
     }
 }

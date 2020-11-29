@@ -7,7 +7,6 @@ public class InventoryMenu : MonoBehaviour
 {
     public static bool inMenu = false;
     CanvasGroup m_cg = null;
-    FirstPersonController fpc = null;
 
     private void OnEnable()
     {
@@ -21,7 +20,6 @@ public class InventoryMenu : MonoBehaviour
 
     private void PlayerInput_INVENTORY()
     {
-        if (!fpc) fpc = FindObjectOfType<FirstPersonController>();
         if (!m_cg) m_cg = GetComponent<CanvasGroup>();
         if (m_cg.alpha == 1f)
         {
@@ -29,8 +27,7 @@ public class InventoryMenu : MonoBehaviour
             m_cg.alpha = 0f;
             m_cg.interactable = false;
             m_cg.blocksRaycasts = false;
-            fpc.ToggleCursor(true);
-            WeaponManager.current.SwapWeapon(WeaponManager.Weapon.pistol);
+            WeaponManager.current.CloseInventory();
         }
         else if (m_cg.alpha == 0f)
         {
@@ -38,8 +35,7 @@ public class InventoryMenu : MonoBehaviour
             m_cg.alpha = 1f;
             m_cg.interactable = true;
             m_cg.blocksRaycasts = true;
-            fpc.ToggleCursor(false);
-            WeaponManager.current.SwapWeapon(WeaponManager.Weapon.bag);
+            WeaponManager.current.OpenInventory();
         }
     }
 }

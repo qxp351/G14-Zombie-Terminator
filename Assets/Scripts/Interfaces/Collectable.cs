@@ -10,18 +10,17 @@ public class Collectable : MonoBehaviour, ICollectable
         {
             switch(itemType)
             {
-                case Item.Type.Weapon: return new Weapon(m_itemName);
-                case Item.Type.Tool: return new Tool(m_itemName);
-                case Item.Type.Consumable:
-                    if (m_randomAmount) return new Consumable(m_itemName, Random.Range(1, 41));
-                    else return new Consumable(m_itemName, m_itemAmount);
-                default: return new Consumable("Null", -1);
+                case Item.Type.Flashlight: return new Flashlight();
+                case Item.Type.Pistol: return new Pistol();
+                case Item.Type.MakeshiftRifle: return new MakeshiftRifle();
+                case Item.Type.Launcher: return new Launcher();
+                case Item.Type.Medkit: return new Medkit();
+                case Item.Type.Ammo: return new Ammo();
+                case Item.Type.CannedFood: return new CannedFood();
+                default: throw new System.NotSupportedException();
             }
         }
     }
 
-    [SerializeField] Item.Type itemType = Item.Type.Weapon;
-    [SerializeField] string m_itemName = "";
-    [SerializeField] int m_itemAmount = 1;
-    [SerializeField] bool m_randomAmount = false;
+    [SerializeField] Item.Type itemType = Item.Type.Pistol;
 }

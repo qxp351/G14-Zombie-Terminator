@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Item
+public class CannedFood : Consumable
 {
-    public Weapon(string name)
+    public CannedFood()
     {
-        named = name;
+        name = "Canned Food";
         amount = 1;
     }
+
     public override void Use()
     {
         throw new System.NotImplementedException();

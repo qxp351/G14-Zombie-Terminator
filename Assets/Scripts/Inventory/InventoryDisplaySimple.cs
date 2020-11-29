@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryDisplaySimple : MonoBehaviour
 {
-    UnityEngine.UI.Text display = null;
+    [SerializeField] GameObject m_slotPrefab = null;
 
     private void OnEnable()
     {
@@ -18,16 +18,34 @@ public class InventoryDisplaySimple : MonoBehaviour
 
     private void Inventory_ITEMS(List<Item> obj)
     {
-        if (!display) display = GetComponent<UnityEngine.UI.Text>();
-
-        display.text = "Inventory:\n";
-        foreach (Item item in obj)
+        GameObject prefab;
+        if (transform.childCount > 1)
         {
-            if (item is Weapon) display.text += "Weapon: ";
-            if (item is Tool) display.text += "Tool: ";
-            if (item is Consumable) display.text += "Consumable: ";
+            var j = 0;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).TryGetComponent(out InventorySlot slot))
+                {
+                    slot.Setup(obj[i]);
+                    j++;
+                }
+            }
 
-            display.text += $"{item.named} [{item.amount}]\n";
+            for (int i = j; i < obj.Count; i++)
+            {
+                if (i >= obj.Count) break;
+
+                prefab = Instantiate(m_slotPrefab, transform);
+                prefab.GetComponent<InventorySlot>().Setup(obj[i]);
+            }
+        }
+        else
+        {
+            foreach (Item item in obj)
+            {
+                prefab = Instantiate(m_slotPrefab, transform);
+                prefab.GetComponent<InventorySlot>().Setup(item);
+            }
         }
     }
 }

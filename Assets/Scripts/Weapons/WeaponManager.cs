@@ -5,14 +5,32 @@ using UnityEngine.Animations.Rigging;
 
 public class WeaponManager : MonoBehaviour
 {
-    public enum Weapon { pistol, rifle, bag }
+    public enum Weapon { pistol, rifle, bag, launcher }
 
     int m_currentWeapon = 0;
-    [SerializeField] List<WeaponSwapBob> m_weapons = new List<WeaponSwapBob>();
+    public static Weapon CurrentWeapon;
+    [SerializeField] List<GameObject> m_weapons = new List<GameObject>();
     [SerializeField] List<WeaponIKs> m_IKs = new List<WeaponIKs>();
+
+    [Header("Flashlight")]
+    [SerializeField] GameObject m_flashlight = null;
 
     public static WeaponManager current;
     private void Awake() => current = this;
+
+    private void Start()
+    {
+        for (int i = 0; i < m_weapons.Count; i++)
+        {
+            if (m_weapons[i].activeSelf)
+            {
+                m_currentWeapon = i;
+                CurrentWeapon = (Weapon)i;
+                break;
+            }
+        }
+        SwapWeapon(CurrentWeapon);
+    }
 
     public void SwapWeapon(Weapon weapon)
     {
@@ -20,19 +38,35 @@ public class WeaponManager : MonoBehaviour
         UnEquipWeapon(m_currentWeapon);
         EquipWeapon(value);
         m_currentWeapon = value;
+        CurrentWeapon = (Weapon)m_currentWeapon;
+    }
+
+    public void OpenInventory()
+    {
+        UnEquipWeapon(m_currentWeapon);
+        EquipWeapon((int)Weapon.bag);
+    }
+    public void CloseInventory()
+    {
+        UnEquipWeapon((int)Weapon.bag);
+        EquipWeapon(m_currentWeapon);
     }
 
     void UnEquipWeapon(int weapon)
     {
-        m_weapons[weapon].SwapOut();
+        m_weapons[weapon].gameObject.SetActive(false);
         m_IKs[weapon].TurnOff();
     }
 
     void EquipWeapon(int weapon)
     {
         m_weapons[weapon].gameObject.SetActive(true);
-        m_weapons[weapon].SwapIn();
         m_IKs[weapon].TurnOn();
+    }
+
+    public void EquipFlashlight()
+    {
+        m_flashlight.SetActive(true);
     }
 
     [System.Serializable]

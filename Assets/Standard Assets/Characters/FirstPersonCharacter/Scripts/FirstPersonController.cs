@@ -131,7 +131,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
 
-            m_MouseLook.UpdateCursorLock();
+            //m_MouseLook.UpdateCursorLock();
         }
 
 
@@ -265,8 +265,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float WalkSpeed() => m_WalkSpeed;
         public float RunSpeed() => m_RunSpeed;
         public float CurrentSpeed() => m_IsWalking ? m_WalkSpeed : m_RunSpeed;
-
-        public void ToggleCursor(bool obj) => m_MouseLook.ChangeInternalLockUpdate(obj);
 
         #endregion
     }
