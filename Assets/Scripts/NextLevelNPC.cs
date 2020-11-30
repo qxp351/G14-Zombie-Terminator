@@ -23,68 +23,91 @@ public class NextLevelNPC : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.F) && triggering)
         {
-            Time.timeScale = 0f;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            PlayerInput.current.TogglePlayerControl(true);
             interacting = true;
             newLevelText.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cancel();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Cancel();
+        //}
     }
     public void Dusk()
     {
-        LevelConditions.current.timeOfDay = LevelConditions.Time.dusk;
-
+        try
+        {
+            LevelConditions.current.timeOfDay = LevelConditions.Time.dusk;
+        }
+        catch
+        {
+            Debug.LogWarning("GameData does not exist. Time of day will remain its default value.");
+        }
     }
     public void Day()
     {
-        LevelConditions.current.timeOfDay = LevelConditions.Time.day;
-
+        try
+        {
+            LevelConditions.current.timeOfDay = LevelConditions.Time.day;
+        }
+        catch
+        {
+            Debug.LogWarning("GameData does not exist. Time of day will remain its default value.");
+        }
     }
     public void Night()
     {
-        LevelConditions.current.timeOfDay = LevelConditions.Time.night;
+        try
+        {
+            LevelConditions.current.timeOfDay = LevelConditions.Time.night;
+        }
+        catch
+        {
+            Debug.LogWarning("GameData does not exist. Time of day will remain its default value.");
+        }
     }
-    public void Docile()
-    {
-        LevelConditions.current.zombieAggression = LevelConditions.Difficulty.docile;
+    //public void Docile()
+    //{
+    //    LevelConditions.current.zombieAggression = LevelConditions.Difficulty.docile;
 
-    }
-    public void Agitated()
-    {
-        LevelConditions.current.zombieAggression = LevelConditions.Difficulty.agitated;
+    //}
+    //public void Agitated()
+    //{
+    //    LevelConditions.current.zombieAggression = LevelConditions.Difficulty.agitated;
 
-    }
-    public void Crazed()
-    {
-        LevelConditions.current.zombieAggression = LevelConditions.Difficulty.crazed;
+    //}
+    //public void Crazed()
+    //{
+    //    LevelConditions.current.zombieAggression = LevelConditions.Difficulty.crazed;
 
-    }
+    //}
 
     public void Go()
     {
         var buildIndex = SceneIndices.DayScene;
-        if (LevelConditions.current.timeOfDay == LevelConditions.Time.dusk)
+
+        try
         {
-            buildIndex = SceneIndices.DuskScene;
+            if (LevelConditions.current.timeOfDay == LevelConditions.Time.dusk)
+            {
+                buildIndex = SceneIndices.DuskScene;
+            }
+            else if (LevelConditions.current.timeOfDay == LevelConditions.Time.night)
+            {
+                buildIndex = SceneIndices.NightScene;
+            }
         }
-        else if (LevelConditions.current.timeOfDay == LevelConditions.Time.night)
+        catch
         {
-            buildIndex = SceneIndices.NightScene;
+            Debug.LogWarning("GameData does not exist. Sending player to DayScene.");
         }
         SceneManager.LoadScene(buildIndex);
     }
     public void Cancel()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        PlayerInput.current.TogglePlayerControl(false);
         newLevelText.SetActive(false);
         triggering = false;
         interacting = false;
-        Time.timeScale = 1f;
     }
     void OnTriggerEnter(Collider other)
     {

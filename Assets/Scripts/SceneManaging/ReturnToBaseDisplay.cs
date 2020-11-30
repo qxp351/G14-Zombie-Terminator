@@ -27,7 +27,7 @@ public class ReturnToBaseDisplay : MonoBehaviour
 
     public void Return()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(SceneIndices.Base);
     }
 
     public void Stay()
@@ -35,5 +35,6 @@ public class ReturnToBaseDisplay : MonoBehaviour
         m_cg.alpha = 0f;
         m_cg.interactable = false;
         m_cg.blocksRaycasts = false;
+        PlayerInput.current.TogglePlayerControl(true);
     }
 }

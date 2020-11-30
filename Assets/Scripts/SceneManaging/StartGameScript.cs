@@ -10,6 +10,6 @@ public class StartGameScript : MonoBehaviour
         //var async = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
         //yield return new WaitUntil(() => async.isDone);
         //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(2));
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneIndices.DuskScene);
     }
 }

@@ -8,14 +8,7 @@ public class NPC_HP : MonoBehaviour
     public GameObject tradeText;
     private GameObject triggeringNpc;
     private bool triggering, interacting;
-    private SuppliesManager supplies;
-    private PlayerStats player;
 
-    private void Start()
-    {
-        supplies = GetComponent<SuppliesManager>();
-        player = GetComponent<PlayerStats>();
-    }
     void Update()
     {
         if(triggering)
@@ -34,8 +27,15 @@ public class NPC_HP : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Y) && interacting)
         {
-            supplies.UseFood();
-            player.Heal(5);
+            // initiate resting sequence
+            try
+            {
+                SuppliesManager.current.UseAmmo();
+            }
+            catch
+            {
+                Debug.Log("GameData object does not exist. Halting rest cutscene.");
+            }
         }
         else if (Input.GetKeyDown(KeyCode.N) && interacting)
         {
@@ -45,7 +45,7 @@ public class NPC_HP : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             triggering = true;
             triggeringNpc = other.gameObject;
@@ -53,7 +53,7 @@ public class NPC_HP : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             triggering = false;
             triggeringNpc = null;
