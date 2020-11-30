@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static event System.Action<List<Item>> ITEMS;
-    [SerializeField] List<Item> m_items = new List<Item>();
+    public static List<Item> m_items = new List<Item>();
 
     public static Inventory current;
     private void Awake() => current = this;
@@ -29,7 +29,15 @@ public class Inventory : MonoBehaviour
     {
         if (ReticleManager.Object.TryGetComponent(out ICollectable collectable))
         {
-            AddItem(collectable.ItemData);
+            try
+            {
+                AddItem(collectable.ItemData);
+            }
+            catch
+            {
+                Debug.LogWarning("Object does not have any item data.");
+                return;
+            }
             Destroy(ReticleManager.Object);
         }
     }

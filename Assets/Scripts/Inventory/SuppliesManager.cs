@@ -18,12 +18,6 @@ public class SuppliesManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void Start()
-    {
-        AMMO?.Invoke(m_currentAmmo);
-        FOOD?.Invoke(m_currentFood);
-    }
-
     public int Ammo() => m_currentAmmo;
     public void UpdateAmmo(int obj)
     {
