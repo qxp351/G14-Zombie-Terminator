@@ -13,8 +13,8 @@ public class InventorySlot : MonoBehaviour
         if (!display) display = GetComponentInChildren<Text>();
         if (!button) button = GetComponent<Button>();
 
-        var str = item is Consumable ? $"{(item as Consumable).amount}" : "NaN";
-        display.text = $"{item.name} [{str}]";
+        var str = item is Consumable ? $" [{(item as Consumable).amount}]" : "";
+        display.text = $"{item.name}";
 
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => Button_OnClick(item));

@@ -17,6 +17,15 @@ public class EnemyStats : Stats
 
     protected override IEnumerator Die()
     {
+        try
+        {
+            EnemySpawnPoint.spawnedEnemies.Remove(gameObject);
+        }
+        catch
+        {
+            Debug.LogWarning("Could not remove this enemy from the spawned enemies list. continuing script...");
+        }
+
         var anim = GetComponentInChildren<Animator>();
         if (anim)
         {

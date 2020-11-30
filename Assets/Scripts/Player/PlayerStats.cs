@@ -8,6 +8,10 @@ public class PlayerStats : Stats
     public static event Action HEAL;
     public static event Action DAMAGE;
     public static event Action<int> HEALTH;
+    public static event Action DEATH;
+
+    [SerializeField] GameObject deathModel = null;
+    [SerializeField] GameObject deathCam = null;
 
     public static PlayerStats current;
     private void Awake() => current = this;
@@ -27,6 +31,13 @@ public class PlayerStats : Stats
 
     protected override IEnumerator Die()
     {
-        throw new NotImplementedException();
+        PlayerInput.current.TogglePlayerControl(true);
+        yield return null;
+
+        GetComponentInChildren<WeaponManager>().gameObject.SetActive(false);
+        deathCam.SetActive(true);
+        deathModel.SetActive(true);
+        DEATH?.Invoke();
+        yield break;
     }
 }

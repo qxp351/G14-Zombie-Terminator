@@ -7,7 +7,7 @@ public class MoveTowards : MonoBehaviour
     [Header("Target Properties")]
     [SerializeField] Transform m_target = null;
     [SerializeField] Vector3 m_speeds = new Vector3(3f, 6f, 9f);
-    [SerializeField] Vector3 m_turnRadii = new Vector3(0.05f, 0.07f, 0.1f);
+    [SerializeField] float m_turnRadius = 0.05f;
     [SerializeField] float m_stoppingDistance = 1f;
 
     [Header("Obstacle Avoidance Properties")]
@@ -23,10 +23,32 @@ public class MoveTowards : MonoBehaviour
     Vector3 m_targetPos;
     Vector3 m_offset;
 
+    LevelConditions.Difficulty difficulty;
+    readonly List<Vector2Int> m_docileRanges = new List<Vector2Int>
+    {
+        new Vector2Int(0, 39),
+        new Vector2Int(0, 19),
+        new Vector2Int(0, 9)
+    };
+    readonly List<Vector2Int> m_agitatedRanges = new List<Vector2Int>
+    {
+        new Vector2Int(40, 69),
+        new Vector2Int(20, 69),
+        new Vector2Int(10, 29)
+    };
+    readonly List<Vector2Int> m_crazedRanges = new List<Vector2Int>
+    {
+        new Vector2Int(70, 99),
+        new Vector2Int(70, 99),
+        new Vector2Int(30, 99)
+    };
+
     private void Start()
     {
         m_anim = GetComponent<Animator>();
         m_target = FindObjectOfType<PlayerStats>().transform;
+
+        difficulty = WeightedDifficulty();
     }
 
     private void Update()
@@ -34,22 +56,46 @@ public class MoveTowards : MonoBehaviour
         if (m_target && !m_anim.GetBool("isDead"))
         {
             GetPositions();
-            if (LevelConditions.current)
+            switch (difficulty)
             {
-                if (LevelConditions.current.zombieAggression == LevelConditions.Difficulty.docile)
-                {
-                    MoveTo_Docile();
-                }
-                else if (LevelConditions.current.zombieAggression == LevelConditions.Difficulty.agitated)
-                {
-                    MoveTo_Agitated();
-                }
-                else if (LevelConditions.current.zombieAggression == LevelConditions.Difficulty.crazed)
-                {
-                    MoveTo_Crazed();
-                }
+                case LevelConditions.Difficulty.docile: MoveTo_Docile(); break;
+                case LevelConditions.Difficulty.agitated: MoveTo_Agitated(); break;
+                case LevelConditions.Difficulty.crazed: MoveTo_Crazed(); break;
             }
         }
+    }
+
+    LevelConditions.Difficulty WeightedDifficulty()
+    {
+        var value = Random.Range(0, 100);
+
+        try
+        {
+            switch (LevelConditions.current.zombieAggression)
+            {
+                case LevelConditions.Difficulty.docile:
+                    if (value > m_docileRanges[0].x && value <= m_docileRanges[0].y) return LevelConditions.Difficulty.docile;
+                    else if (value > m_agitatedRanges[0].x && value <= m_agitatedRanges[0].y) return LevelConditions.Difficulty.agitated;
+                    else if (value > m_crazedRanges[0].x && value <= m_crazedRanges[0].y) return LevelConditions.Difficulty.crazed;
+                    else return LevelConditions.Difficulty.docile;
+                case LevelConditions.Difficulty.agitated:
+                    if (value > m_docileRanges[1].x && value <= m_docileRanges[1].y) return LevelConditions.Difficulty.docile;
+                    else if (value > m_agitatedRanges[1].x && value <= m_agitatedRanges[1].y) return LevelConditions.Difficulty.agitated;
+                    else if (value > m_crazedRanges[1].x && value <= m_crazedRanges[1].y) return LevelConditions.Difficulty.crazed;
+                    else return LevelConditions.Difficulty.docile;
+                case LevelConditions.Difficulty.crazed:
+                    if (value > m_docileRanges[2].x && value <= m_docileRanges[2].y) return LevelConditions.Difficulty.docile;
+                    else if (value > m_agitatedRanges[2].x && value <= m_agitatedRanges[2].y) return LevelConditions.Difficulty.agitated;
+                    else if (value > m_crazedRanges[2].x && value <= m_crazedRanges[2].y) return LevelConditions.Difficulty.crazed;
+                    else return LevelConditions.Difficulty.docile;
+            }
+        }
+        catch
+        {
+            Debug.LogWarning("GameData does not exist. Agitated difficulty will be chosen.");
+        }
+
+        return LevelConditions.Difficulty.agitated;
     }
 
     void GetPositions()
@@ -70,7 +116,7 @@ public class MoveTowards : MonoBehaviour
 
         // slerp rotate towards the target
         m_lookAt = Quaternion.LookRotation(m_targetPos - (m_transformPos + m_offset), Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, m_lookAt, m_turnRadii.x);
+        transform.rotation = Quaternion.Slerp(transform.rotation, m_lookAt, m_turnRadius);
 
         // move towards target if there is no root motion
         if (!m_useRootMotion) transform.position += transform.forward * m_speeds.x * Time.deltaTime;
@@ -98,7 +144,7 @@ public class MoveTowards : MonoBehaviour
 
         // slerp rotate towards the target
         m_lookAt = Quaternion.LookRotation(m_targetPos - (m_transformPos + m_offset), Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, m_lookAt, m_turnRadii.y);
+        transform.rotation = Quaternion.Slerp(transform.rotation, m_lookAt, m_turnRadius);
 
         // move towards target if there is no root motion
         if (!m_useRootMotion) transform.position += transform.forward * m_speeds.y * Time.deltaTime;
@@ -126,7 +172,7 @@ public class MoveTowards : MonoBehaviour
 
         // slerp rotate towards the target
         m_lookAt = Quaternion.LookRotation(m_targetPos - (m_transformPos + m_offset), Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, m_lookAt, m_turnRadii.z);
+        transform.rotation = Quaternion.Slerp(transform.rotation, m_lookAt, m_turnRadius);
 
         // move towards target if there is no root motion
         if (!m_useRootMotion) transform.position += transform.forward * m_speeds.z * Time.deltaTime;
