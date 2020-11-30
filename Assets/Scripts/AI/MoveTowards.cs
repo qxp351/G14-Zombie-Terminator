@@ -27,6 +27,7 @@ public class MoveTowards : MonoBehaviour
     private void Start()
     {
         m_anim = GetComponent<Animator>();
+        m_target = FindObjectOfType<PlayerStats>().transform;
     }
 
     private void Update()
