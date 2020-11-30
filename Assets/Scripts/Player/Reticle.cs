@@ -20,9 +20,9 @@ public class Reticle : MonoBehaviour
         PlayerInput.INVENTORY -= PlayerInput_INVENTORY;
     }
 
-    private void PlayerInput_INVENTORY()
+    private void PlayerInput_INVENTORY(bool obj)
     {
-        isInMenu = !isInMenu;
+        isInMenu = obj;
     }
 
     private void Update()

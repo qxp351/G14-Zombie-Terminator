@@ -10,17 +10,14 @@ public class PlayerInput : MonoBehaviour
 {
     public static event Action FIRE;
     public static event Action GRAB;
-    public static event Action INVENTORY;
+    public static event Action<bool> INVENTORY;
 
     FirstPersonController m_fpc;
     bool m_inInventory = false;
 
-    RawImage m_cam;
-
     private void Start()
     {
         m_fpc = GetComponent<FirstPersonController>();
-        m_cam = GameObject.FindGameObjectWithTag("MiniCam").GetComponent<RawImage>();
         StartCoroutine(nameof(StepUpdate));
         ToggleCursor(false);
     }
@@ -37,12 +34,11 @@ public class PlayerInput : MonoBehaviour
             if (CrossPlatformInputManager.GetButton("Fire1") && Reticle.Is == Reticle.ReticleType.shoot) FIRE?.Invoke();
             if (CrossPlatformInputManager.GetButtonDown("Inventory") && m_fpc.IsGrounded())
             {
-                INVENTORY?.Invoke();
                 m_inInventory = !m_inInventory;
                 ToggleCursor(m_inInventory);
                 m_fpc.enabled = !m_inInventory;
-                m_cam.enabled = !m_inInventory;
-            } 
+                INVENTORY?.Invoke(m_inInventory);
+            }
             if (CrossPlatformInputManager.GetButtonDown("Flashlight") && WeaponManager.HasFlashlight)
             {
                 WeaponManager.current.ToggleFlashlight();

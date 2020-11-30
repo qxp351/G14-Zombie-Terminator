@@ -18,10 +18,10 @@ public class InventoryMenu : MonoBehaviour
         PlayerInput.INVENTORY -= PlayerInput_INVENTORY;
     }
 
-    private void PlayerInput_INVENTORY()
+    private void PlayerInput_INVENTORY(bool obj)
     {
         if (!m_cg) m_cg = GetComponent<CanvasGroup>();
-        if (m_cg.alpha == 1f)
+        if (!obj)
         {
             inMenu = false;
             m_cg.alpha = 0f;
@@ -29,7 +29,7 @@ public class InventoryMenu : MonoBehaviour
             m_cg.blocksRaycasts = false;
             WeaponManager.current.CloseInventory();
         }
-        else if (m_cg.alpha == 0f)
+        else
         {
             inMenu = true;
             m_cg.alpha = 1f;

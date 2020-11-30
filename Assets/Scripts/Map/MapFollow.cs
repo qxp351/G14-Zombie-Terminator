@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class MapFollow : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private Vector3 topview;
+    private Transform target;
+    [SerializeField] private Vector3 topview = new Vector3(0f, 20f);
+
+    private void Start()
+    {
+        try
+        {
+            target = FindObjectOfType<PlayerStats>().transform;
+        }
+        catch
+        {
+            throw new System.MissingMemberException("Could not find player in scene.");
+        }
+    }
 
     void Update()
     {
