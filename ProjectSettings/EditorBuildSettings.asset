@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/PersistentObjectsScene.unity
     guid: b7af0f44f375d4cb0b4a34b84806ce60
   - enabled: 1
-    path: Assets/Scenes/EnvironmentScene/EnvironmentScene.unity
-    guid: 7ca7e61f1d6fa43118fcdc86fca375ae
+    path: Assets/ENVIRONMENT/Scenes/DayScene/DayScene.unity
+    guid: be47623d947b770469c691f0d2057410
   - enabled: 1
-    path: Assets/Scenes/HomebaseScene/HomebaseScene.unity
-    guid: bee2114259b814b6b91fc4c65d9d7a4e
+    path: Assets/ENVIRONMENT/Scenes/DuskScene/DuskScene.unity
+    guid: 8b41bc425f15e4ce79ed1561e6bc3fb9
+  - enabled: 1
+    path: Assets/ENVIRONMENT/Scenes/NightScene/NightScene.unity
+    guid: 833f8b85c5f0b4e2d9049707f2465064
+  - enabled: 1
+    path: Assets/Scenes/Base Camp/Base Camp.unity
+    guid: 5209409304fe3144585ba2a3cddf706f
   m_configObjects: {}

@@ -15,11 +15,14 @@ public class PlayerInput : MonoBehaviour
     FirstPersonController m_fpc;
     bool m_inInventory = false;
 
+    public static PlayerInput current;
+    private void Awake() => current = this;
+
     private void Start()
     {
         m_fpc = GetComponent<FirstPersonController>();
         StartCoroutine(nameof(StepUpdate));
-        ToggleCursor(false);
+        TogglePlayerControl(false);
     }
 
     IEnumerator StepUpdate()
@@ -35,8 +38,7 @@ public class PlayerInput : MonoBehaviour
             if (CrossPlatformInputManager.GetButtonDown("Inventory") && m_fpc.IsGrounded())
             {
                 m_inInventory = !m_inInventory;
-                ToggleCursor(m_inInventory);
-                m_fpc.enabled = !m_inInventory;
+                TogglePlayerControl(m_inInventory);
                 INVENTORY?.Invoke(m_inInventory);
             }
             if (CrossPlatformInputManager.GetButtonDown("Flashlight") && WeaponManager.HasFlashlight)
@@ -47,9 +49,10 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    void ToggleCursor(bool obj)
+    public void TogglePlayerControl(bool obj)
     {
         Cursor.lockState = obj ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = obj;
+        m_fpc.enabled = !obj;
     }
 }

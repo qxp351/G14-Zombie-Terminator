@@ -21,7 +21,6 @@ public class ReturnToBase : MonoBehaviour, ICollectable
     private void PlayerInput_GRAB()
     {
         RETURNTOBASE?.Invoke();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        PlayerInput.current.TogglePlayerControl(false);
     }
 }

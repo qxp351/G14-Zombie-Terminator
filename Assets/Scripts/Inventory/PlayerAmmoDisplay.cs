@@ -15,7 +15,8 @@ public class PlayerAmmoDisplay : MonoBehaviour
         }
         catch
         {
-            throw new System.MissingMemberException("Game Data object cannot be found.");
+            Debug.LogWarning("Game Data object cannot be found, thus ammo will not be updated properly.");
+            return;
         }
     }
 

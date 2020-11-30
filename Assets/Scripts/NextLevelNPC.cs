@@ -66,7 +66,16 @@ public class NextLevelNPC : MonoBehaviour
 
     public void Go()
     {
-        SceneManager.LoadScene(SceneIndices.Environment);
+        var buildIndex = SceneIndices.DayScene;
+        if (LevelConditions.current.timeOfDay == LevelConditions.Time.dusk)
+        {
+            buildIndex = SceneIndices.DuskScene;
+        }
+        else if (LevelConditions.current.timeOfDay == LevelConditions.Time.night)
+        {
+            buildIndex = SceneIndices.NightScene;
+        }
+        SceneManager.LoadScene(buildIndex);
     }
     public void Cancel()
     {

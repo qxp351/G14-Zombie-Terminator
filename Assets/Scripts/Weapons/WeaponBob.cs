@@ -6,6 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class WeaponBob : MonoBehaviour
 {
     [SerializeField] bool m_canFire = true;
+    [SerializeField] bool m_infiniteAmmo = false;
 
     [Header("Appearance Properties")]
     [SerializeField] AnimationCurve m_appearCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
@@ -48,7 +49,24 @@ public class WeaponBob : MonoBehaviour
 
     private void PlayerInput_FIRE()
     {
-        if (!m_firing && !m_appearing && SuppliesManager.current.Ammo() > 0) StartCoroutine(nameof(FiredBob));
+        if (!m_firing && !m_appearing)
+        {
+            if (m_infiniteAmmo)
+            {
+                StartCoroutine(nameof(FiredBob));
+            }
+            else
+            {
+                try
+                {
+                    if (SuppliesManager.current.Ammo() > 0) StartCoroutine(nameof(FiredBob));
+                }
+                catch
+                {
+                    Debug.LogWarning("GameData object does not exist. Player will be unable to shoot.");
+                }
+            }
+        }
     }
 
     private void Awake()
@@ -101,7 +119,7 @@ public class WeaponBob : MonoBehaviour
     {
         m_firing = true;
         m_muzzleFlash.Play();
-        SuppliesManager.current.UseAmmo();
+        if (!m_infiniteAmmo) SuppliesManager.current.UseAmmo();
 
         var mask = LayerMask.GetMask("Hitable");
         var cam = Camera.main.transform;
