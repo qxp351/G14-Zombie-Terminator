@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Head
   - Body
+  - NPC
   layers:
   - Default
   - TransparentFX
