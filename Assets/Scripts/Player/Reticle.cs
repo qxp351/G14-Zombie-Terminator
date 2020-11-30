@@ -8,7 +8,6 @@ public class Reticle : MonoBehaviour
     public static ReticleType Is;
 
     [SerializeField] List<GameObject> reticleType = new List<GameObject>();
-    [SerializeField] float m_grabDistance = 2f;
     bool isInMenu = false;
 
     private void OnEnable()
@@ -34,10 +33,7 @@ public class Reticle : MonoBehaviour
             return;
         }
 
-        if (ReticleManager.Mask == LayerMask.GetMask("Collectable"))
-        {
-            if (ReticleManager.Distance <= m_grabDistance) ReticleMask(1);
-        }
+        if (ReticleManager.Mask == LayerMask.GetMask("Collectable")) ReticleMask(1);
         else ReticleMask(0);
     }
 

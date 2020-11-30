@@ -16,7 +16,6 @@ public class MoveTowards : MonoBehaviour
 
     [Header("Options")]
     [SerializeField] bool m_useRootMotion = true;
-    [SerializeField] bool m_useGroundedMotion = true;
 
     Quaternion m_lookAt;
     Animator m_anim;
@@ -55,9 +54,9 @@ public class MoveTowards : MonoBehaviour
 
     void GetPositions()
     {
-        // grab positions from the current frame, with or with out the y axis
-        m_transformPos = new Vector3(transform.position.x, m_useGroundedMotion ? 0f : transform.position.y, transform.position.z);
-        m_targetPos = new Vector3(m_target.position.x, m_useGroundedMotion ? 0f : m_target.position.y, m_target.position.z);
+        // grab positions from the current frame that do not care about the y axis
+        m_transformPos = new Vector3(transform.position.x, 0f, transform.position.z);
+        m_targetPos = new Vector3(m_target.position.x, 0f, m_target.position.z);
     }
 
     void MoveTo_Docile()
@@ -78,7 +77,7 @@ public class MoveTowards : MonoBehaviour
 
 
         // determine animation states depending on distance to target
-        if (Vector3.Distance(m_transformPos, m_targetPos) > m_stoppingDistance)
+        if (Vector3.Distance(transform.position, m_target.position) > m_stoppingDistance)
         {
             if (!m_anim.GetBool("isWalking")) m_anim.SetBool("isWalking", true);
         }
@@ -106,7 +105,7 @@ public class MoveTowards : MonoBehaviour
 
 
         // determine animation states depending on distance to target
-        if (Vector3.Distance(m_transformPos, m_targetPos) > m_stoppingDistance)
+        if (Vector3.Distance(transform.position, m_target.position) > m_stoppingDistance)
         {
             if (!m_anim.GetBool("isRunning")) m_anim.SetBool("isRunning", true);
         }
@@ -134,7 +133,7 @@ public class MoveTowards : MonoBehaviour
 
 
         // determine animation states depending on distance to target
-        if (Vector3.Distance(m_transformPos, m_targetPos) > m_stoppingDistance)
+        if (Vector3.Distance(transform.position, m_target.position) > m_stoppingDistance)
         {
             if (!m_anim.GetBool("isSprinting")) m_anim.SetBool("isSprinting", true);
         }
@@ -142,7 +141,6 @@ public class MoveTowards : MonoBehaviour
         {
             if (m_anim.GetBool("isSprinting")) m_anim.SetBool("isSprinting", false);
         }
-
     }
 
     public Transform Target() => m_target;

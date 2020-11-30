@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1483017877, guid: 85582a7cec4394853a411b63bd03c42d, type: 3}
+      propertyPath: zombieAggression
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4802595373415418040, guid: 85582a7cec4394853a411b63bd03c42d, type: 3}
       propertyPath: m_Name
       value: GameData
