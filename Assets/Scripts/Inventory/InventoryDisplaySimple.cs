@@ -6,6 +6,18 @@ public class InventoryDisplaySimple : MonoBehaviour
 {
     [SerializeField] GameObject m_slotPrefab = null;
 
+    private void Start()
+    {
+        try
+        {
+            Inventory_ITEMS(Inventory.m_items);
+        }
+        catch
+        {
+            throw new System.MissingMemberException("Game Data object cannot be found.");
+        }
+    }
+
     private void OnEnable()
     {
         Inventory.ITEMS += Inventory_ITEMS;
