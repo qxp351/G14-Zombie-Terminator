@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class PlayerInput : MonoBehaviour
     FirstPersonController m_fpc;
     bool m_inInventory = false;
 
+    RawImage m_cam;
+
     private void Start()
     {
         m_fpc = GetComponent<FirstPersonController>();
+        m_cam = GameObject.FindGameObjectWithTag("MiniCam").GetComponent<RawImage>();
         StartCoroutine(nameof(StepUpdate));
         ToggleCursor(false);
     }
@@ -37,7 +41,8 @@ public class PlayerInput : MonoBehaviour
                 m_inInventory = !m_inInventory;
                 ToggleCursor(m_inInventory);
                 m_fpc.enabled = !m_inInventory;
-            }
+                m_cam.enabled = !m_inInventory;
+            } 
             if (CrossPlatformInputManager.GetButtonDown("Flashlight") && WeaponManager.HasFlashlight)
             {
                 WeaponManager.current.ToggleFlashlight();

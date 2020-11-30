@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawnPoint : MonoBehaviour
 {
     [SerializeField] GameObject m_enemyPrefab = null;
-    [SerializeField] Vector3 m_startDelays = new Vector3(6f, 3f);
+    [SerializeField] Vector3 m_startDelays = new Vector3(3f, 0f);
     [SerializeField] Vector3 m_spawnSpeeds = new Vector3(8f, 5f, 2f);
 
     private void Start()

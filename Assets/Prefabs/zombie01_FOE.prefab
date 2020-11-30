@@ -13,7 +13,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.45, z: 0.23}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &463111039
+--- !u!114 &5349139324552050603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,25 +22,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212383737984929487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 5
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!1 &1312493690809727216
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +177,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.51, z: 0.18}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &1761972529
+--- !u!114 &3554207954593505381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,25 +186,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 1378541120031271184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 6
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &1954594259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -209,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
-  limb: 0
+  limb: 1
   onHit:
     m_PersistentCalls:
       m_Calls:
@@ -225,9 +269,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_values: []
-  m_weaponValues: []
-  m_multipliers: []
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &1309847592
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -241,7 +303,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.45, z: 0.23}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &1309847593
+--- !u!114 &4628696045344155987
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,25 +312,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 2421542502432259788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 5
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &1103018027
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -282,7 +366,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.15, z: 0.1}
   m_Center: {x: 0, y: 0.09, z: 0}
---- !u!114 &1103018028
+--- !u!114 &8636390764897047562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,25 +375,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 3225755027561931615}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 4
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &1957076897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -323,7 +429,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11, y: 0.29, z: 0.11}
   m_Center: {x: 0, y: 0.12, z: 0}
---- !u!114 &1957076898
+--- !u!114 &5901823208726149407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,25 +438,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 3624156525610843074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 3
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &206079842
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -364,7 +492,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.3, z: 0.12}
   m_Center: {x: 0, y: 0.12, z: 0}
---- !u!114 &206079843
+--- !u!114 &1086038732098401385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,25 +501,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 3625740245258761590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 2
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &275191664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -405,7 +555,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.11, y: 0.29, z: 0.11}
   m_Center: {x: 0, y: 0.12, z: 0}
---- !u!114 &275191665
+--- !u!114 &289801025572838131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,25 +564,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 3697798850755561264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 3
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &75430565
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -446,7 +618,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.15, z: 0.1}
   m_Center: {x: 0, y: 0.09, z: 0}
---- !u!114 &75430566
+--- !u!114 &2982922722539974645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -455,25 +627,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 4530197434562599767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 4
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!54 &4934509566902003584
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -504,7 +698,7 @@ CharacterController:
   m_Height: 1.62
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.91, z: 0}
@@ -541,7 +735,6 @@ MonoBehaviour:
   m_rayDistance: 1
   m_avoidanceMultiplier: 15
   m_useRootMotion: 1
-  m_useGroundedMotion: 1
 --- !u!114 &4934509566902003599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +832,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.3, z: 0.12}
   m_Center: {x: 0, y: 0.12, z: 0}
---- !u!114 &1904598434
+--- !u!114 &1580064338280391732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -648,25 +841,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 5355278999370850568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 2
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &1726617116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -680,7 +895,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.14, y: 0.29, z: 0.1}
   m_Center: {x: 0, y: -0.06, z: 0.04}
---- !u!114 &1726617117
+--- !u!114 &3246602571309809621
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -689,25 +904,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 6182673408537388854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 7
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &527447834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -721,7 +958,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.51, z: 0.18}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &527447835
+--- !u!114 &5897683427786043611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -730,25 +967,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 6810790774306029312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 6
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &2123676457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -762,7 +1021,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.23, z: 0.2}
   m_Center: {x: 0, y: 0.09, z: 0.05}
---- !u!114 &2123676458
+--- !u!114 &6728777288365045142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -771,25 +1030,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 6874281874623022744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 0
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!65 &1281420783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -803,7 +1084,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.14, y: 0.29, z: 0.1}
   m_Center: {x: 0, y: -0.06, z: 0.04}
---- !u!114 &1281420784
+--- !u!114 &3056096255495964563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -812,25 +1093,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 7512384865402373109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c319a21d4c043fb9a6b1be9a1ae561, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a9f118e7817a44ba9a062b80b679487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_impactParticles: {fileID: 5261100445424365170, guid: 257fea92ff203488492ed228f06f31e0, type: 3}
+  limb: 7
   onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4934509566903944344}
         m_TargetAssemblyTypeName: Stats, Assembly-CSharp
         m_MethodName: Damage
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_values:
+  - 10
+  - 1
+  - 2
+  - 3
+  - 4
+  - 2
+  - 3
+  - 4
+  m_multipliers:
+  - {x: 2, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  - {x: 1.5, y: 1, z: 0.5}
+  m_weaponMultipliers:
+  - {x: 1, y: 0.9, z: 0.5}
+  - {x: 1.2, y: 1, z: 0.7}
 --- !u!1001 &4934509566664647821
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemyPrefab: {fileID: 1312493690809727216, guid: 64d67a4c923244305abb72fb24d988f6, type: 3}
-  m_startDelays: {x: 6, y: 3, z: 0}
+  m_startDelays: {x: 3, y: 0, z: 0}
   m_spawnSpeeds: {x: 8, y: 5, z: 2}
