@@ -21,6 +21,6 @@ public class ReturnToBase : MonoBehaviour, ICollectable
     private void PlayerInput_GRAB()
     {
         RETURNTOBASE?.Invoke();
-        PlayerInput.current.TogglePlayerControl(false);
+        PlayerInput.current.TogglePlayerControl(true);
     }
 }

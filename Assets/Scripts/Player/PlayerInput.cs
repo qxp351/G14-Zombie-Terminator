@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     public static event Action FIRE;
     public static event Action GRAB;
     public static event Action<bool> INVENTORY;
+    public static event Action<bool> CONTROL;
 
     FirstPersonController m_fpc;
     bool m_inInventory = false;
@@ -54,5 +55,6 @@ public class PlayerInput : MonoBehaviour
         Cursor.lockState = obj ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = obj;
         m_fpc.enabled = !obj;
+        CONTROL?.Invoke(obj);
     }
 }

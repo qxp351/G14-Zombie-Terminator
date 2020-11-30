@@ -68,9 +68,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Blend: 0.08812523
+    - _Blend: 1
     m_Colors:
-    - _Tint: {r: 0.8970931, g: 0.8733862, b: 0.8733862, a: 1}
+    - _Tint: {r: 0.5527944, g: 0.52769357, b: 0.5395048, a: 1}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001
 EditorExtensionImpl:

@@ -38,17 +38,21 @@ public class WeaponBob : MonoBehaviour
 
     private void OnEnable()
     {
-        if (m_canFire) PlayerInput.FIRE += PlayerInput_FIRE;
+        PlayerInput.FIRE += PlayerInput_FIRE;
+        PlayerInput.CONTROL += PlayerInput_CONTROL;
         StartCoroutine(nameof(OnAppear));
     }
 
     private void OnDisable()
     {
-        if (m_canFire) PlayerInput.FIRE -= PlayerInput_FIRE;
+        PlayerInput.FIRE -= PlayerInput_FIRE;
+        PlayerInput.CONTROL += PlayerInput_CONTROL;
     }
 
     private void PlayerInput_FIRE()
     {
+        if (!m_canFire) return;
+
         if (!m_firing && !m_appearing)
         {
             if (m_infiniteAmmo)
@@ -67,6 +71,11 @@ public class WeaponBob : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void PlayerInput_CONTROL(bool obj)
+    {
+        m_canFire = !obj;
     }
 
     private void Awake()

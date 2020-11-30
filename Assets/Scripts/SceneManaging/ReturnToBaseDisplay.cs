@@ -35,6 +35,6 @@ public class ReturnToBaseDisplay : MonoBehaviour
         m_cg.alpha = 0f;
         m_cg.interactable = false;
         m_cg.blocksRaycasts = false;
-        PlayerInput.current.TogglePlayerControl(true);
+        PlayerInput.current.TogglePlayerControl(false);
     }
 }
