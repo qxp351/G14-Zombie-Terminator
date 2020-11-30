@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         m_fpc = GetComponent<FirstPersonController>();
-        m_cam = GameObject.FindGameObjectWithTag("MiniCam").GetComponent<RawImage>();
+        //m_cam = GameObject.FindGameObjectWithTag("MiniCam").GetComponent<RawImage>();
         StartCoroutine(nameof(StepUpdate));
         ToggleCursor(false);
     }
@@ -41,7 +41,7 @@ public class PlayerInput : MonoBehaviour
                 m_inInventory = !m_inInventory;
                 ToggleCursor(m_inInventory);
                 m_fpc.enabled = !m_inInventory;
-                m_cam.enabled = !m_inInventory;
+                //m_cam.enabled = !m_inInventory;
             } 
             if (CrossPlatformInputManager.GetButtonDown("Flashlight") && WeaponManager.HasFlashlight)
             {
