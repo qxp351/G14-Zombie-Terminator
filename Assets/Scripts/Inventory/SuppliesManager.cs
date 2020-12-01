@@ -18,6 +18,22 @@ public class SuppliesManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    private void OnEnable()
+    {
+        PlayerStats.DEATH += PlayerStats_DEATH;
+    }
+
+    private void OnDisable()
+    {
+        PlayerStats.DEATH -= PlayerStats_DEATH;
+    }
+
+    private void PlayerStats_DEATH()
+    {
+        m_currentAmmo = 9;
+        m_currentFood = 1;
+    }
+
     public int Ammo() => m_currentAmmo;
     public void UpdateAmmo(int obj)
     {
@@ -39,6 +55,11 @@ public class SuppliesManager : MonoBehaviour
     public void UseFood()
     {
         m_currentFood = m_currentFood - 1 < 0 ? 0 : m_currentFood - 1;
+        if (m_currentFood == 0)
+        {
+            PlayerInput.InvokeDeath();
+            return;
+        }
         FOOD?.Invoke(m_currentFood);
     }
 }

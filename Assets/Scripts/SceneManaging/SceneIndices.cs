@@ -11,4 +11,5 @@ public class SceneIndices
     public static int DuskScene = 3;
     public static int NightScene = 4;
     public static int Base = 5;
+    public static int GameOver = 6;
 }

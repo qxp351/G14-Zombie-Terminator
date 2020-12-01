@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Reticle : MonoBehaviour
 {
-    public enum ReticleType { shoot, grab }
+    public enum ReticleType { shoot, grab, talk }
     public static ReticleType Is;
 
     [SerializeField] List<GameObject> reticleType = new List<GameObject>();
@@ -13,14 +13,21 @@ public class Reticle : MonoBehaviour
     private void OnEnable()
     {
         PlayerInput.INVENTORY += PlayerInput_INVENTORY;
+        PlayerInput.CONTROL += PlayerInput_CONTROL;
     }
 
     private void OnDisable()
     {
         PlayerInput.INVENTORY -= PlayerInput_INVENTORY;
+        PlayerInput.CONTROL -= PlayerInput_CONTROL;
     }
 
     private void PlayerInput_INVENTORY(bool obj)
+    {
+        isInMenu = obj;
+    }
+
+    private void PlayerInput_CONTROL(bool obj)
     {
         isInMenu = obj;
     }
@@ -34,6 +41,7 @@ public class Reticle : MonoBehaviour
         }
 
         if (ReticleManager.Mask == LayerMask.GetMask("Collectable")) ReticleMask(1);
+        else if (ReticleManager.Mask == LayerMask.GetMask("Talkable")) ReticleMask(2);
         else ReticleMask(0);
     }
 

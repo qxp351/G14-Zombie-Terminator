@@ -1,37 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR.WSA.Input;
 
-public class NextLevelNPC : MonoBehaviour
+public class NextLevelNPC : MonoBehaviour, ITalkable
 {
-    private bool triggering;
-    public GameObject npcText;
+    //private bool triggering;
+    public Text npcText;
     public GameObject newLevelText;
-    private bool interacting = false;
+    //private bool interacting = false;
 
-    private void Update()
+    //private void Update()
+    //{
+    //    if (triggering)
+    //    {
+    //        npcText.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        npcText.SetActive(false);
+    //    }
+    //    if(Input.GetKeyDown(KeyCode.F) && triggering)
+    //    {
+    //        PlayerInput.current.TogglePlayerControl(true);
+    //        interacting = true;
+    //        newLevelText.SetActive(true);
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        Cancel();
+    //    }
+    //}
+
+    LevelConditions.Difficulty newDayDifficulty;
+
+    private void Start()
     {
-        if (triggering)
-        {
-            npcText.SetActive(true);
-        }
-        else
-        {
-            npcText.SetActive(false);
-        }
-        if(Input.GetKeyDown(KeyCode.F) && triggering)
-        {
-            PlayerInput.current.TogglePlayerControl(true);
-            interacting = true;
-            newLevelText.SetActive(true);
-        }
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    Cancel();
-        //}
+        NPC_HP_REST();
     }
+
+    private void OnEnable()
+    {
+        NPC_HP.REST += NPC_HP_REST;
+    }
+
+    private void OnDisable()
+    {
+        NPC_HP.REST -= NPC_HP_REST;
+    }
+
+    private void NPC_HP_REST()
+    {
+        newDayDifficulty = (LevelConditions.Difficulty)Random.Range(0, 3);
+
+        switch (newDayDifficulty)
+        {
+            case LevelConditions.Difficulty.docile: npcText.text = $"Zombie Activity: Docile"; break;
+            case LevelConditions.Difficulty.agitated: npcText.text = $"Zombie Activity: Agitated"; break;
+            case LevelConditions.Difficulty.crazed: npcText.text = $"Zombie Activity: Crazed"; break;
+
+        }
+    }
+
     public void Dusk()
     {
         try
@@ -106,21 +137,28 @@ public class NextLevelNPC : MonoBehaviour
     {
         PlayerInput.current.TogglePlayerControl(false);
         newLevelText.SetActive(false);
-        triggering = false;
-        interacting = false;
+        //triggering = false;
+        //interacting = false;
     }
-    void OnTriggerEnter(Collider other)
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        triggering = true;
+    //    }
+    //}
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        triggering = false;
+    //    }
+    //}
+
+    public void SpeakTo()
     {
-        if (other.CompareTag("Player"))
-        {
-            triggering = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            triggering = false;
-        }
+        PlayerInput.current.TogglePlayerControl(true);
+        //interacting = true;
+        newLevelText.SetActive(true);
     }
 }

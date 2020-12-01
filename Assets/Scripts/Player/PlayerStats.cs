@@ -38,6 +38,10 @@ public class PlayerStats : Stats
         deathCam.SetActive(true);
         deathModel.SetActive(true);
         DEATH?.Invoke();
+
+        yield return new WaitForSeconds(5f);
+        PlayerInput.InvokeDeath();
+
         yield break;
     }
 }

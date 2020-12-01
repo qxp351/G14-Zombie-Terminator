@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
 {
     public static event Action FIRE;
     public static event Action GRAB;
+    public static event Action TALK;
     public static event Action<bool> INVENTORY;
     public static event Action<bool> CONTROL;
 
@@ -35,6 +36,11 @@ public class PlayerInput : MonoBehaviour
                 GRAB?.Invoke();
                 yield return new WaitForSeconds(0.2f);
             }
+            if (CrossPlatformInputManager.GetButtonDown("Fire1") && Reticle.Is == Reticle.ReticleType.talk)
+            {
+                TALK?.Invoke();
+                yield return new WaitForSeconds(0.2f);
+            }
             if (CrossPlatformInputManager.GetButton("Fire1") && Reticle.Is == Reticle.ReticleType.shoot) FIRE?.Invoke();
             if (CrossPlatformInputManager.GetButtonDown("Inventory") && m_fpc.IsGrounded())
             {
@@ -56,5 +62,10 @@ public class PlayerInput : MonoBehaviour
         Cursor.visible = obj;
         m_fpc.enabled = !obj;
         CONTROL?.Invoke(obj);
+    }
+
+    public static void InvokeDeath()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneIndices.GameOver);
     }
 }

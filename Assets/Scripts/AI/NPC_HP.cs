@@ -2,62 +2,83 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC_HP : MonoBehaviour
+public class NPC_HP : MonoBehaviour, ITalkable
 {
-    public GameObject npcText;
-    public GameObject tradeText;
-    private GameObject triggeringNpc;
-    private bool triggering, interacting;
+    public static event System.Action REST;
 
-    void Update()
+    public GameObject optionCanvas;
+    //public GameObject npcText;
+    //public GameObject tradeText;
+    //private GameObject triggeringNpc;
+    //private bool triggering, interacting;
+
+    //void Update()
+    //{
+    //    if(triggering)
+    //    {
+    //        npcText.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        npcText.SetActive(false);
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.F) && triggering)
+    //    {
+    //        triggering = false;
+    //        tradeText.SetActive(true);
+    //        interacting = true;
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.Y) && interacting)
+    //    {
+
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.N) && interacting)
+    //    {
+    //        interacting = false;
+    //        tradeText.SetActive(false);
+    //    }
+    //}
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        triggering = true;
+    //        triggeringNpc = other.gameObject;
+    //    }
+    //}
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        triggering = false;
+    //        triggeringNpc = null;
+    //        interacting = false;
+    //    }
+    //}
+
+    public void Rest()
     {
-        if(triggering)
+        // initiate resting sequence
+        try
         {
-            npcText.SetActive(true);
+            SuppliesManager.current.UseFood();
+            REST?.Invoke();
         }
-        else
+        catch
         {
-            npcText.SetActive(false);
-        }
-        if (Input.GetKeyDown(KeyCode.F) && triggering)
-        {
-            triggering = false;
-            tradeText.SetActive(true);
-            interacting = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Y) && interacting)
-        {
-            // initiate resting sequence
-            try
-            {
-                SuppliesManager.current.UseAmmo();
-            }
-            catch
-            {
-                Debug.Log("GameData object does not exist. Halting rest cutscene.");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.N) && interacting)
-        {
-            interacting = false;
-            tradeText.SetActive(false);
+            Debug.Log("GameData object does not exist. Halting rest cutscene.");
         }
     }
-    void OnTriggerEnter(Collider other)
+
+    public void Cancel()
     {
-        if (other.CompareTag("Player"))
-        {
-            triggering = true;
-            triggeringNpc = other.gameObject;
-        }
+        PlayerInput.current.TogglePlayerControl(false);
+        optionCanvas.SetActive(false);
     }
-    private void OnTriggerExit(Collider other)
+
+    public void SpeakTo()
     {
-        if (other.CompareTag("Player"))
-        {
-            triggering = false;
-            triggeringNpc = null;
-            interacting = false;
-        }
+        PlayerInput.current.TogglePlayerControl(true);
+        optionCanvas.SetActive(true);
     }
 }

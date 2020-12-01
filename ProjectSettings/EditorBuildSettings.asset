@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Base Camp/Base Camp.unity
     guid: 5209409304fe3144585ba2a3cddf706f
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: bada3c9b648eb4f1cb64d441e23c50aa
   m_configObjects: {}
