@@ -9,6 +9,7 @@ public class PlayerDamageDisplay : MonoBehaviour
     float m_CyclePosition, m_Time, m_OriginalAlphaValue;
     CanvasGroup m_cg;
     bool m_isThrobbing = false;
+    bool m_playerIsDead = false;
 
     private void Start()
     {
@@ -18,16 +19,25 @@ public class PlayerDamageDisplay : MonoBehaviour
     private void OnEnable()
     {
         PlayerStats.DAMAGE += PlayerStats_DAMAGE;
+        PlayerStats.DEATH += PlayerStats_DEATH;
     }
+
+
 
     private void OnDisable()
     {
         PlayerStats.DAMAGE -= PlayerStats_DAMAGE;
+        PlayerStats.DEATH -= PlayerStats_DEATH;
     }
 
     private void PlayerStats_DAMAGE()
     {
-        if (!m_isThrobbing) StartCoroutine(nameof(ThrobEffect));
+        if (!m_isThrobbing && !m_playerIsDead) StartCoroutine(nameof(ThrobEffect));
+    }
+
+    private void PlayerStats_DEATH()
+    {
+        m_playerIsDead = true;
     }
 
     IEnumerator ThrobEffect()

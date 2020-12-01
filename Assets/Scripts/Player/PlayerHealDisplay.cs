@@ -8,6 +8,7 @@ public class PlayerHealDisplay : MonoBehaviour
     [SerializeField] AnimationCurve alphaCurve = new AnimationCurve();
     float m_CyclePosition, m_Time, m_OriginalAlphaValue;
     CanvasGroup m_cg;
+    bool m_isThrobbing = false;
 
     private void Start()
     {
@@ -26,12 +27,13 @@ public class PlayerHealDisplay : MonoBehaviour
 
     private void PlayerStats_DAMAGE()
     {
-        StartCoroutine(nameof(ThrobEffect));
+        if (!m_isThrobbing) StartCoroutine(nameof(ThrobEffect));
     }
 
     IEnumerator ThrobEffect()
     {
         // setup
+        m_isThrobbing = true;
         m_OriginalAlphaValue = m_cg.alpha;
         m_Time = alphaCurve[alphaCurve.length - 1].time;
 
@@ -42,6 +44,7 @@ public class PlayerHealDisplay : MonoBehaviour
             yield return null;
         }
         m_CyclePosition -= m_Time;
+        m_isThrobbing = false;
         yield break;
     }
 }

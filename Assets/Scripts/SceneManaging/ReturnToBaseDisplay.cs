@@ -36,5 +36,6 @@ public class ReturnToBaseDisplay : MonoBehaviour
         m_cg.interactable = false;
         m_cg.blocksRaycasts = false;
         PlayerInput.current.TogglePlayerControl(false);
+        PlayerInput.current.ToggleInventory(true);
     }
 }

@@ -150,6 +150,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     public void Cancel()
     {
         PlayerInput.current.TogglePlayerControl(false);
+        PlayerInput.current.ToggleInventory(true);
         newLevelText.SetActive(false);
         mustRestText.SetActive(false);
         lastShotText.SetActive(false);
@@ -174,6 +175,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     public void SpeakTo()
     {
         PlayerInput.current.TogglePlayerControl(true);
+        PlayerInput.current.ToggleInventory(false);
         //interacting = true;
         int food = int.MaxValue;
         try
@@ -187,7 +189,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
 
         if (m_canLeave)
         {
-            if (food < 0) lastShotText.SetActive(true);
+            if (food == 0) lastShotText.SetActive(true);
             else newLevelText.SetActive(true);
         }
         else mustRestText.SetActive(true);

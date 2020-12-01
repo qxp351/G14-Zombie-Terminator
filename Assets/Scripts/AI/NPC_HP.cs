@@ -76,6 +76,7 @@ public class NPC_HP : MonoBehaviour, ITalkable
     public void Cancel()
     {
         PlayerInput.current.TogglePlayerControl(false);
+        PlayerInput.current.ToggleInventory(true);
         optionCanvas.SetActive(false);
     }
 
@@ -95,6 +96,7 @@ public class NPC_HP : MonoBehaviour, ITalkable
             Debug.LogWarning("GameData does not exist or the Text object does not exist.");
         }
         PlayerInput.current.TogglePlayerControl(true);
+        PlayerInput.current.ToggleInventory(false);
         optionCanvas.SetActive(true);
     }
 }

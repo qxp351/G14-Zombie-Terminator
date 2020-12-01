@@ -10,5 +10,6 @@ public class ReturnToBase : MonoBehaviour, ITalkable
     {
         RETURNTOBASE?.Invoke();
         PlayerInput.current.TogglePlayerControl(true);
+        PlayerInput.current.ToggleInventory(false);
     }
 }
