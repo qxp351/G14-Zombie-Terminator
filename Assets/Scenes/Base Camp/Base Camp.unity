@@ -10233,7 +10233,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1921190483}
         m_TargetAssemblyTypeName: NextLevelNPC, Assembly-CSharp
-        m_MethodName: Night
+        m_MethodName: LastShotGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

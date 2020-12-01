@@ -194,4 +194,6 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
         }
         else mustRestText.SetActive(true);
     }
+
+    public void LastShotGo() => SceneManager.LoadScene(SceneIndices.NightScene);
 }
