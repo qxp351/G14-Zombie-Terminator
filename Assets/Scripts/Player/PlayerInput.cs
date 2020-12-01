@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour
 
     FirstPersonController m_fpc;
     bool m_inInventory = false;
+    public static bool disabler = false;
 
     public static PlayerInput current;
     private void Awake() => current = this;
@@ -23,6 +24,7 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         m_fpc = GetComponent<FirstPersonController>();
+        disabler = false;
         StartCoroutine(nameof(StepUpdate));
         TogglePlayerControl(false);
     }
@@ -42,7 +44,7 @@ public class PlayerInput : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
             if (CrossPlatformInputManager.GetButton("Fire1") && Reticle.Is == Reticle.ReticleType.shoot) FIRE?.Invoke();
-            if (CrossPlatformInputManager.GetButtonDown("Inventory") && m_fpc.IsGrounded())
+            if (CrossPlatformInputManager.GetButtonDown("Inventory") && m_fpc.IsGrounded() && disabler == false)
             {
                 m_inInventory = !m_inInventory;
                 TogglePlayerControl(m_inInventory);
@@ -67,5 +69,10 @@ public class PlayerInput : MonoBehaviour
     public static void InvokeDeath()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneIndices.GameOver);
+    }
+
+    public static void DisableInventory()
+    {
+        disabler = true;
     }
 }

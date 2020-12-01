@@ -32,6 +32,7 @@ public class PlayerStats : Stats
     protected override IEnumerator Die()
     {
         PlayerInput.current.TogglePlayerControl(true);
+        PlayerInput.DisableInventory();
         yield return null;
 
         GetComponentInChildren<WeaponManager>().gameObject.SetActive(false);
