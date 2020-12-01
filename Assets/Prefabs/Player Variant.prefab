@@ -348,6 +348,7 @@ MonoBehaviour:
   m_appearanceSpeed: 2.5
   m_muzzleFlash: {fileID: 0}
   m_impact: {fileID: 0}
+  m_gunShot: {fileID: 0}
   m_idleBob:
     BobRange: {x: 0.33, y: 0.33, z: 0.33}
     HorizontalCurve:
@@ -6077,6 +6078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ee26ac7920f45d98efd7ec86c92dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audios: {fileID: 0}
 --- !u!114 &880679480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6092,6 +6094,9 @@ MonoBehaviour:
   health: {x: 20, y: 20}
   deathModel: {fileID: 919132148940989467}
   deathCam: {fileID: 1165002367}
+  m_hurtSounds:
+  - {fileID: 8300000, guid: d65b81d6b848b467da29dab292d5ac66, type: 3}
+  - {fileID: 8300000, guid: efec5f3a773b84f5fa2ae40719d54aea, type: 3}
 --- !u!114 &2109004332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6195,6 +6200,7 @@ MonoBehaviour:
   m_appearanceSpeed: 2.5
   m_muzzleFlash: {fileID: 719880045134749686}
   m_impact: {fileID: 2882166910405842047, guid: 08385ff7299d043a9b1a7d2b4887c2e9, type: 3}
+  m_gunShot: {fileID: 8300000, guid: 04ea5ccf3e2564a8aab77830a2d262c6, type: 3}
   m_idleBob:
     BobRange: {x: 0.33, y: 0.33, z: 0.33}
     HorizontalCurve:
@@ -6527,6 +6533,7 @@ MonoBehaviour:
   m_appearanceSpeed: 2.5
   m_muzzleFlash: {fileID: 1903320131}
   m_impact: {fileID: 2882166910405842047, guid: 08385ff7299d043a9b1a7d2b4887c2e9, type: 3}
+  m_gunShot: {fileID: 8300000, guid: 257a598ee6c9e4cfcb7782317e579ed0, type: 3}
   m_idleBob:
     BobRange: {x: 0.33, y: 0.33, z: 0.33}
     HorizontalCurve:
@@ -12852,15 +12859,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 55.614056
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -94.06
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12949,6 +12956,10 @@ PrefabInstance:
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_Center.y
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.36
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}

@@ -14,6 +14,10 @@ public class MoveTowards : MonoBehaviour
     [SerializeField] float m_rayDistance = 1f;
     [SerializeField] float m_avoidanceMultiplier = 15f;
 
+    [Header("Audio Properties")]
+    [SerializeField] List<AudioClip> m_noises = new List<AudioClip>();
+    AudioSource m_audios;
+
     [Header("Options")]
     [SerializeField] bool m_useRootMotion = true;
 
@@ -23,7 +27,7 @@ public class MoveTowards : MonoBehaviour
     Vector3 m_targetPos;
     Vector3 m_offset;
 
-    LevelConditions.Difficulty difficulty;
+    LevelConditions.Difficulty m_difficulty;
     readonly List<Vector2Int> m_docileRanges = new List<Vector2Int>
     {
         new Vector2Int(0, 39),
@@ -47,8 +51,10 @@ public class MoveTowards : MonoBehaviour
     {
         m_anim = GetComponent<Animator>();
         m_target = FindObjectOfType<PlayerStats>().transform;
+        m_audios = GetComponent<AudioSource>();
 
-        difficulty = WeightedDifficulty();
+        m_difficulty = WeightedDifficulty();
+        StartCoroutine(nameof(MakeNoises));
     }
 
     private void Update()
@@ -56,7 +62,7 @@ public class MoveTowards : MonoBehaviour
         if (m_target && !m_anim.GetBool("isDead"))
         {
             GetPositions();
-            switch (difficulty)
+            switch (m_difficulty)
             {
                 case LevelConditions.Difficulty.docile: MoveTo_Docile(); break;
                 case LevelConditions.Difficulty.agitated: MoveTo_Agitated(); break;
@@ -190,4 +196,20 @@ public class MoveTowards : MonoBehaviour
     }
 
     public Transform Target() => m_target;
+
+    IEnumerator MakeNoises()
+    {
+        while (Application.isPlaying)
+        {
+            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            try
+            {
+                m_audios.PlayOneShot(m_noises[Random.Range(0, m_noises.Count)]);
+            }
+            catch
+            {
+                Debug.LogWarning("m_noises contains no audio clips.");
+            }
+        }
+    }
 }

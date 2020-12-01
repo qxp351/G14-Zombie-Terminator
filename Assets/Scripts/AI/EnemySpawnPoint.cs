@@ -11,6 +11,11 @@ public class EnemySpawnPoint : MonoBehaviour
 
     [SerializeField] GameObject m_enemyPrefab = null;
 
+    private void OnDisable()
+    {
+        if (spawnedEnemies.Count > 0) spawnedEnemies.Clear();
+    }
+
     private void Start()
     {
         if (LevelConditions.current)

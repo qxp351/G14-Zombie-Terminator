@@ -9,6 +9,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     //private bool triggering;
     public Text npcText;
     public GameObject newLevelText;
+    public GameObject mustRestText;
     //private bool interacting = false;
 
     //private void Update()
@@ -33,11 +34,22 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     //    }
     //}
 
-    LevelConditions.Difficulty newDayDifficulty;
+    LevelConditions.Difficulty m_newDayDifficulty;
+    bool m_canLeave = false;
 
     private void Start()
     {
-        NPC_HP_REST();
+        m_newDayDifficulty = (LevelConditions.Difficulty)Random.Range(0, 3);
+
+        switch (m_newDayDifficulty)
+        {
+            case LevelConditions.Difficulty.docile: npcText.text = $"Zombie Activity: Docile"; break;
+            case LevelConditions.Difficulty.agitated: npcText.text = $"Zombie Activity: Agitated"; break;
+            case LevelConditions.Difficulty.crazed: npcText.text = $"Zombie Activity: Crazed"; break;
+
+        }
+
+        m_canLeave = false;
     }
 
     private void OnEnable()
@@ -52,15 +64,16 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
 
     private void NPC_HP_REST()
     {
-        newDayDifficulty = (LevelConditions.Difficulty)Random.Range(0, 3);
+        m_newDayDifficulty = (LevelConditions.Difficulty)Random.Range(0, 3);
 
-        switch (newDayDifficulty)
+        switch (m_newDayDifficulty)
         {
             case LevelConditions.Difficulty.docile: npcText.text = $"Zombie Activity: Docile"; break;
             case LevelConditions.Difficulty.agitated: npcText.text = $"Zombie Activity: Agitated"; break;
             case LevelConditions.Difficulty.crazed: npcText.text = $"Zombie Activity: Crazed"; break;
 
         }
+        m_canLeave = true;
     }
 
     public void Dusk()
@@ -137,6 +150,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     {
         PlayerInput.current.TogglePlayerControl(false);
         newLevelText.SetActive(false);
+        mustRestText.SetActive(false);
         //triggering = false;
         //interacting = false;
     }
@@ -159,6 +173,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     {
         PlayerInput.current.TogglePlayerControl(true);
         //interacting = true;
-        newLevelText.SetActive(true);
+        if (m_canLeave) newLevelText.SetActive(true);
+        else mustRestText.SetActive(true);
     }
 }

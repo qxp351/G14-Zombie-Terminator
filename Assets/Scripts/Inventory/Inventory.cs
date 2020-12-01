@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static event System.Action<List<Item>> ITEMS;
-    public static List<Item> m_items = new List<Item>();
+    public List<Item> m_items = new List<Item>();
 
     public static Inventory current;
     private void Awake() => current = this;
@@ -18,11 +18,18 @@ public class Inventory : MonoBehaviour
     private void OnEnable()
     {
         PlayerInput.GRAB += PlayerInput_GRAB;
+        PlayerInput.INVENTORY += PlayerInput_INVENTORY;
+    }
+
+    private void PlayerInput_INVENTORY(bool obj)
+    {
+        ITEMS?.Invoke(m_items);
     }
 
     private void OnDisable()
     {
         PlayerInput.GRAB -= PlayerInput_GRAB;
+        PlayerInput.INVENTORY += PlayerInput_INVENTORY;
     }
 
     private void PlayerInput_GRAB()

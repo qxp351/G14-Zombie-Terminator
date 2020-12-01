@@ -10,8 +10,12 @@ public class PlayerStats : Stats
     public static event Action<int> HEALTH;
     public static event Action DEATH;
 
+    [Header("On Death Properties")]
     [SerializeField] GameObject deathModel = null;
     [SerializeField] GameObject deathCam = null;
+
+    [Header("Audio Properties")]
+    [SerializeField] List<AudioClip> m_hurtSounds = new List<AudioClip>();
 
     public static PlayerStats current;
     private void Awake() => current = this;
@@ -27,6 +31,14 @@ public class PlayerStats : Stats
         base.Damage(amount);
         DAMAGE?.Invoke();
         HEALTH?.Invoke(health.x);
+        try
+        {
+            PlayerInput.current.audios.PlayOneShot(m_hurtSounds[UnityEngine.Random.Range(0, m_hurtSounds.Count)]);
+        }
+        catch
+        {
+            Debug.LogWarning("Either player input or m_hurtSound does not exist.");
+        }
     }
 
     protected override IEnumerator Die()

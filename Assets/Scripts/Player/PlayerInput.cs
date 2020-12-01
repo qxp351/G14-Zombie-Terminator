@@ -17,12 +17,15 @@ public class PlayerInput : MonoBehaviour
     FirstPersonController m_fpc;
     bool m_inInventory = false;
 
+    [HideInInspector] public AudioSource audios;
+
     public static PlayerInput current;
     private void Awake() => current = this;
 
     private void Start()
     {
         m_fpc = GetComponent<FirstPersonController>();
+        audios = GetComponent<AudioSource>();
         StartCoroutine(nameof(StepUpdate));
         TogglePlayerControl(false);
     }

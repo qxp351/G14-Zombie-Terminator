@@ -17,6 +17,9 @@ public class WeaponBob : MonoBehaviour
     [SerializeField] ParticleSystem m_muzzleFlash = null;
     [SerializeField] ParticleSystem m_impact = null;
 
+    [Header("Audio Properties")]
+    [SerializeField] AudioClip m_gunShot = null;
+
     [Header("Weapon Bob Properties")]
     [SerializeField] CurvedObjectBob m_idleBob = new CurvedObjectBob();
     [SerializeField] CurvedObjectBob m_firedBob = new CurvedObjectBob();
@@ -128,7 +131,9 @@ public class WeaponBob : MonoBehaviour
     {
         m_firing = true;
         m_muzzleFlash.Play();
+
         if (!m_infiniteAmmo) SuppliesManager.current.UseAmmo();
+        PlayerInput.current.audios.PlayOneShot(m_gunShot, 0.3f);
 
         var mask = LayerMask.GetMask("Hitable");
         var cam = Camera.main.transform;
