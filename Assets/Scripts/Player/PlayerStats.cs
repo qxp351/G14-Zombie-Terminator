@@ -33,7 +33,7 @@ public class PlayerStats : Stats
         HEALTH?.Invoke(health.x);
         try
         {
-            PlayerInput.current.audios.PlayOneShot(m_hurtSounds[UnityEngine.Random.Range(0, m_hurtSounds.Count)]);
+            PlayerInput.current.audios.PlayOneShot(m_hurtSounds[UnityEngine.Random.Range(0, m_hurtSounds.Count)], 1f);
         }
         catch
         {
@@ -44,6 +44,7 @@ public class PlayerStats : Stats
     protected override IEnumerator Die()
     {
         PlayerInput.current.TogglePlayerControl(true);
+        PlayerInput.DisableInventory();
         yield return null;
 
         GetComponentInChildren<WeaponManager>().gameObject.SetActive(false);

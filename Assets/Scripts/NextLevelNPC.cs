@@ -10,6 +10,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     public Text npcText;
     public GameObject newLevelText;
     public GameObject mustRestText;
+    public GameObject lastShotText;
     //private bool interacting = false;
 
     //private void Update()
@@ -151,6 +152,7 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
         PlayerInput.current.TogglePlayerControl(false);
         newLevelText.SetActive(false);
         mustRestText.SetActive(false);
+        lastShotText.SetActive(false);
         //triggering = false;
         //interacting = false;
     }
@@ -173,7 +175,21 @@ public class NextLevelNPC : MonoBehaviour, ITalkable
     {
         PlayerInput.current.TogglePlayerControl(true);
         //interacting = true;
-        if (m_canLeave) newLevelText.SetActive(true);
+        int food = int.MaxValue;
+        try
+        {
+            food = SuppliesManager.current.Food();
+        }
+        catch
+        {
+            Debug.LogWarning("GameData does not exist.");
+        }
+
+        if (m_canLeave)
+        {
+            if (food < 0) lastShotText.SetActive(true);
+            else newLevelText.SetActive(true);
+        }
         else mustRestText.SetActive(true);
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawnPoint : MonoBehaviour
 {
-    public static bool isSpawning = false;
     public static HashSet<GameObject> spawnedEnemies = new HashSet<GameObject>();
     public static  Vector3Int m_maxEnemies = new Vector3Int(10, 30, 50);
     public static Vector3 m_spawnSpeeds = new Vector3(8f, 5f, 2f);
@@ -37,21 +36,19 @@ public class EnemySpawnPoint : MonoBehaviour
 
     IEnumerator Spawn(int maxEnemies, float spawnSpeed)
     {
-        var order = Random.Range(0, 20);
-        for (int i = 0; i < order; i++) yield return null;
+        yield return new WaitForSeconds(Random.Range(0f, 3f));
 
         while (Application.isPlaying)
         {
-            yield return new WaitUntil(() => !isSpawning);
-
-            isSpawning = true;
-            if (spawnedEnemies.Count >= maxEnemies) continue;
+            if (spawnedEnemies.Count >= maxEnemies)
+            {
+                yield return new WaitUntil(() => spawnedEnemies.Count < maxEnemies);
+            }
             yield return new WaitForSeconds(spawnSpeed);
 
             var obj = Instantiate(m_enemyPrefab, transform.position, m_enemyPrefab.transform.rotation);
             spawnedEnemies.Add(obj);
-
-            isSpawning = false;
+            Debug.Log($"spawned enemies: {spawnedEnemies.Count}");
             yield return null;
         }
         yield break;

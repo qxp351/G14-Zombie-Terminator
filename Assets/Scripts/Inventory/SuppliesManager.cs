@@ -55,7 +55,7 @@ public class SuppliesManager : MonoBehaviour
     public void UseFood()
     {
         m_currentFood = m_currentFood - 1 < 0 ? 0 : m_currentFood - 1;
-        if (m_currentFood == 0)
+        if (m_currentFood < 0)
         {
             PlayerInput.InvokeDeath();
             return;

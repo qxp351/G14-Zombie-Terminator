@@ -20,6 +20,7 @@ public class EnemyStats : Stats
         try
         {
             EnemySpawnPoint.spawnedEnemies.Remove(gameObject);
+            Debug.Log($"spawned enemies: {EnemySpawnPoint.spawnedEnemies.Count}");
         }
         catch
         {

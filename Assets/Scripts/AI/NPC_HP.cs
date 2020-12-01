@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC_HP : MonoBehaviour, ITalkable
 {
     public static event System.Action REST;
 
     public GameObject optionCanvas;
+    public Text npcText;
     //public GameObject npcText;
     //public GameObject tradeText;
     //private GameObject triggeringNpc;
@@ -63,6 +65,7 @@ public class NPC_HP : MonoBehaviour, ITalkable
         {
             SuppliesManager.current.UseFood();
             REST?.Invoke();
+            Cancel();
         }
         catch
         {
@@ -78,6 +81,19 @@ public class NPC_HP : MonoBehaviour, ITalkable
 
     public void SpeakTo()
     {
+        try
+        {
+            if (SuppliesManager.current.Food() == 0)
+            {
+                npcText.text = "Would you like to rest? We will not survive the night.";
+            }
+            else npcText.text = "Rest for the day and feed the camp?";
+        }
+        catch
+        {
+            if (npcText) npcText.text = "Rest for the day and feed the camp?";
+            Debug.LogWarning("GameData does not exist or the Text object does not exist.");
+        }
         PlayerInput.current.TogglePlayerControl(true);
         optionCanvas.SetActive(true);
     }
